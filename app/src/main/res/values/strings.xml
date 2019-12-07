@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TestTask</string>
     <string name="title_activity_main">TestTask</string>
+    <string name="email_hint">E-mail</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_in_button_caption">Sign in</string>
 </resources>
