@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/startingFragment"
         android:name="com.testtask.ui.fragment.starting.StartingFragment"
-        tools:layout="@layout/starting_fragment">
+        tools:layout="@layout/fragment_starting">
 
         <action
             android:id="@+id/action_startingFragment_to_authFragment"
@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/authFragment"
         android:name="com.testtask.ui.fragment.auth.AuthFragment"
-        tools:layout="@layout/auth_fragment">
+        tools:layout="@layout/fragment_auth">
 
         <action
             android:id="@+id/action_authFragment_to_mainFragment"
@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.testtask.ui.fragment.main.MainFragment"
-        tools:layout="@layout/main_fragment">
+        tools:layout="@layout/fragment_main">
 
         <action
             android:id="@+id/action_mainFragment_to_authFragment"

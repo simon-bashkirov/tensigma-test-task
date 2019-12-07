@@ -21,7 +21,7 @@ class StartingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.starting_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_starting, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
