@@ -54,6 +54,7 @@
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginEnd="@dimen/margin_normal"
             android:ellipsize="marquee"
+            android:scrollHorizontally="true"
             android:singleLine="true"
             android:text="@{viewModel.firstName}"
             app:layout_constraintBottom_toBottomOf="@id/userFirstNameCaptionTextView"
