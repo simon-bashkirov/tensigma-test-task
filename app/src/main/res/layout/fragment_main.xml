@@ -20,13 +20,11 @@
             android:id="@+id/singOutButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginEnd="@dimen/margin_large"
             android:onClick="@{() -> viewModel.signOutButtonClicked()}"
             android:text="@string/sign_out_button_caption"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/clearButton"
+            app:layout_constraintStart_toStartOf="@id/startButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
