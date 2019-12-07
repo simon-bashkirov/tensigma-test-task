@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="item"
+            type="com.testtask.ui.model.TransactionItem" />
+    </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -18,6 +25,7 @@
             android:ellipsize="marquee"
             android:scrollHorizontally="true"
             android:singleLine="true"
+            android:text="@{item.hashOutput}"
             tools:text="2j2l2k3kj2l2k3jl2222423423242l" />
 
         <TextView
@@ -27,6 +35,7 @@
             android:layout_marginStart="@dimen/margin_small"
             android:layout_weight="0.15"
             android:gravity="center"
+            android:text="@{item.timeOutput}"
             tools:text="17:24" />
 
         <TextView
@@ -35,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/margin_small"
+            android:text="@{item.valueBtcOutput}"
             android:layout_weight="0.4"
             tools:text="0.123456789 BTC" />
 
@@ -43,6 +53,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="@{item.valueUsdOutput}"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginEnd="@dimen/margin_normal"
             android:layout_weight="0.2"

@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
 import com.testtask.R
 import com.testtask.databinding.FragmentMainBinding
 
@@ -27,7 +29,16 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        binding?.viewModel = viewModel
+        val transactionsAdapter = TransactionsAdapter()
+        binding?.transactionsRecyclerView?.apply {
+            itemAnimator = DefaultItemAnimator()
+            adapter = transactionsAdapter
+        }
+        viewModel.transactions.observe(
+            viewLifecycleOwner,
+            Observer { transactionsAdapter.submitList(it) })
     }
 
     override fun onDestroyView() {
