@@ -1,50 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingTop="@dimen/margin_small"
-    android:paddingBottom="@dimen/margin_small">
+<layout>
 
-    <TextView
-        android:id="@+id/hashTextView"
-        android:layout_width="0dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_normal"
-        android:layout_weight="0.35"
-        android:ellipsize="marquee"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        tools:text="2j2l2k3kj2l2k3jl2222423423242l" />
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/margin_small"
+        android:paddingBottom="@dimen/margin_small">
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_weight="0.15"
-        android:gravity="center"
-        tools:text="17:24" />
+        <TextView
+            android:id="@+id/hashTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_weight="0.35"
+            android:ellipsize="marquee"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            tools:text="2j2l2k3kj2l2k3jl2222423423242l" />
 
-    <TextView
-        android:id="@+id/valueBtc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_weight="0.4"
-        tools:text="0.123456789 BTC" />
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            tools:text="17:24" />
 
-    <TextView
-        android:id="@+id/valueUsd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_normal"
-        android:layout_weight="0.2"
-        tools:text="101.45 $" />
+        <TextView
+            android:id="@+id/valueBtc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_weight="0.4"
+            tools:text="0.123456789 BTC" />
+
+        <TextView
+            android:id="@+id/valueUsd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_weight="0.2"
+            tools:text="101.45 $" />
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>

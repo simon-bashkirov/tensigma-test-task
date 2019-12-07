@@ -4,29 +4,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.testtask.R
+import com.testtask.databinding.FragmentAuthBinding
 
 class AuthFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = AuthFragment()
-    }
-
-    private lateinit var viewModel: AuthViewModel
+    private var binding: FragmentAuthBinding? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_auth, container, false)
+    ) = DataBindingUtil.inflate<FragmentAuthBinding>(
+        inflater, R.layout.fragment_auth, container, false
+    )
+        .apply { lifecycleOwner = viewLifecycleOwner }
+        .also { binding = it }
+        .root
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
-
 }

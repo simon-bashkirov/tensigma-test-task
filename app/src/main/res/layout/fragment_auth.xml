@@ -1,50 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingStart="@dimen/margin_large"
-    android:paddingEnd="@dimen/margin_large"
-    tools:context=".ui.fragment.auth.AuthFragment">
+<layout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/horizontalCenterGuideline"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+    <data>
 
-    <EditText
-        android:id="@+id/emailTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_normal"
-        android:hint="@string/email_hint"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@id/passwordTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <variable
+            name="viewModel"
+            type="com.testtask.ui.fragment.auth.AuthViewModel" />
 
-    <EditText
-        android:id="@+id/passwordTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/password_hint"
-        android:importantForAutofill="no"
-        android:inputType="textVisiblePassword"
-        app:layout_constraintBottom_toTopOf="@id/horizontalCenterGuideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    </data>
 
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:text="@string/sign_in_button_caption"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordTextView" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/margin_large"
+        android:paddingEnd="@dimen/margin_large"
+        tools:context=".ui.fragment.auth.AuthFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/horizontalCenterGuideline"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <EditText
+            android:id="@+id/emailTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:hint="@string/email_hint"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toTopOf="@id/passwordTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/passwordTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_hint"
+            android:importantForAutofill="no"
+            android:inputType="textVisiblePassword"
+            app:layout_constraintBottom_toTopOf="@id/horizontalCenterGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/sign_in_button_caption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passwordTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

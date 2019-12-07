@@ -1,4 +1,4 @@
-package com.testtask.ui.fragment
+package com.testtask.ui.fragment.starting
 
 import androidx.lifecycle.ViewModel
 

@@ -1,170 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.main.MainFragment">
+<layout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/singOutButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_large"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginEnd="@dimen/margin_large"
-        android:text="@string/sign_out_button_caption"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/verticalCenterGuideLine"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        <variable
+            name="viewModel"
+            type="com.testtask.ui.fragment.main.MainViewModel" />
 
-    <TextView
-        android:id="@+id/userFirstNameCaptionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:scrollHorizontally="true"
-        android:text="@string/user_first_name_caption"
-        app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine"
-        app:layout_constraintTop_toBottomOf="@id/singOutButton" />
+    </data>
 
-    <TextView
-        android:id="@+id/userFirstNameOutputTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_normal"
-        android:ellipsize="marquee"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="@id/userFirstNameCaptionTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
-        app:layout_constraintTop_toTopOf="@id/userFirstNameCaptionTextView"
-        tools:text="John" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.main.MainFragment">
 
-    <TextView
-        android:id="@+id/userLastNameCaptionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:text="@string/user_last_name_caption"
-        app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine"
-        app:layout_constraintTop_toBottomOf="@id/userFirstNameCaptionTextView" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/singOutButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:text="@string/sign_out_button_caption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/userLastNameOutputTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_normal"
-        android:ellipsize="marquee"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="@id/userLastNameCaptionTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
-        app:layout_constraintTop_toTopOf="@id/userLastNameCaptionTextView"
-        tools:text="Smith" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/verticalCenterGuideLine"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
-    <TextView
-        android:id="@+id/userEmailCaptionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:text="@string/user_email_caption"
-        app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine"
-        app:layout_constraintTop_toBottomOf="@id/userLastNameCaptionTextView" />
+        <TextView
+            android:id="@+id/userFirstNameCaptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:scrollHorizontally="true"
+            android:text="@string/user_first_name_caption"
+            app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/singOutButton" />
 
-    <TextView
-        android:id="@+id/userEmailOutputTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_normal"
-        android:ellipsize="marquee"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="@id/userEmailCaptionTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
-        app:layout_constraintTop_toTopOf="@id/userEmailCaptionTextView"
-        tools:text="john-smith@gmail.com" />
+        <TextView
+            android:id="@+id/userFirstNameOutputTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="@id/userFirstNameCaptionTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
+            app:layout_constraintTop_toTopOf="@id/userFirstNameCaptionTextView"
+            tools:text="John" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginBottom="@dimen/margin_normal"
-        app:layout_constraintBottom_toTopOf="@+id/transactionsTotalCaptionTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_transaction"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userEmailCaptionTextView" />
+        <TextView
+            android:id="@+id/userLastNameCaptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="@string/user_last_name_caption"
+            app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/userFirstNameCaptionTextView" />
 
-    <TextView
-        android:id="@+id/transactionsTotalCaptionTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_small"
-        android:layout_marginBottom="@dimen/margin_normal"
-        android:text="@string/transactions_total_caption"
-        app:layout_constraintBottom_toTopOf="@id/stopButton"
-        app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine" />
+        <TextView
+            android:id="@+id/userLastNameOutputTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:ellipsize="marquee"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="@id/userLastNameCaptionTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
+            app:layout_constraintTop_toTopOf="@id/userLastNameCaptionTextView"
+            tools:text="Smith" />
 
-    <TextView
-        android:id="@+id/transactionsTotalOutputTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_small"
-        android:layout_marginEnd="@dimen/margin_normal"
-        android:ellipsize="marquee"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="@id/transactionsTotalCaptionTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
-        app:layout_constraintTop_toTopOf="@id/transactionsTotalCaptionTextView"
-        tools:text="10000 USD" />
+        <TextView
+            android:id="@+id/userEmailCaptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="@string/user_email_caption"
+            app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/userLastNameCaptionTextView" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/startButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_normal"
-        android:singleLine="true"
-        android:text="@string/start_button_caption"
-        app:layout_constraintBottom_toBottomOf="@id/stopButton"
-        app:layout_constraintEnd_toStartOf="@id/stopButton"
-        app:layout_constraintTop_toTopOf="@id/stopButton" />
+        <TextView
+            android:id="@+id/userEmailOutputTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:ellipsize="marquee"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="@id/userEmailCaptionTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
+            app:layout_constraintTop_toTopOf="@id/userEmailCaptionTextView"
+            tools:text="john-smith@gmail.com" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/stopButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_normal"
-        android:text="@string/stop_button_caption"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/verticalCenterGuideLine"
-        app:layout_constraintStart_toStartOf="@id/verticalCenterGuideLine" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal"
+            app:layout_constraintBottom_toTopOf="@+id/transactionsTotalCaptionTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userEmailCaptionTextView"
+            tools:listitem="@layout/item_transaction" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/clearButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_normal"
-        android:text="@string/clear_button_caption"
-        app:layout_constraintBottom_toBottomOf="@+id/stopButton"
-        app:layout_constraintStart_toEndOf="@+id/stopButton"
-        app:layout_constraintTop_toTopOf="@+id/stopButton" />
+        <TextView
+            android:id="@+id/transactionsTotalCaptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:text="@string/transactions_total_caption"
+            app:layout_constraintBottom_toTopOf="@id/stopButton"
+            app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/transactionsTotalOutputTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:ellipsize="marquee"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="@id/transactionsTotalCaptionTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
+            app:layout_constraintTop_toTopOf="@id/transactionsTotalCaptionTextView"
+            tools:text="10000 USD" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/startButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:singleLine="true"
+            android:text="@string/start_button_caption"
+            app:layout_constraintBottom_toBottomOf="@id/stopButton"
+            app:layout_constraintEnd_toStartOf="@id/stopButton"
+            app:layout_constraintTop_toTopOf="@id/stopButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/stopButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:text="@string/stop_button_caption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/verticalCenterGuideLine"
+            app:layout_constraintStart_toStartOf="@id/verticalCenterGuideLine" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:text="@string/clear_button_caption"
+            app:layout_constraintBottom_toBottomOf="@+id/stopButton"
+            app:layout_constraintStart_toEndOf="@+id/stopButton"
+            app:layout_constraintTop_toTopOf="@+id/stopButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
