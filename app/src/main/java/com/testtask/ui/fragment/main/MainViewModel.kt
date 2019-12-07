@@ -10,13 +10,7 @@ import com.testtask.ui.model.TransactionItem
 
 class MainViewModel : ViewModel() {
 
-    private val profile = MutableLiveData<ProfileShort>().apply {
-        value = ProfileShort(
-            "sfasfasdfasfsadfsafadfasfsadfsafsadfasdfsdsfdafafsafdasfasdfafasdfasfafadfsdfafafasfa",
-            "ivanov",
-            "cull@gmil.com"
-        )
-    }
+    private val profile = MutableLiveData<ProfileShort>()
 
     val firstName = Transformations.map(profile) { it.firstName }
 
