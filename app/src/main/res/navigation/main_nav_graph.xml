@@ -8,17 +8,38 @@
     <fragment
         android:id="@+id/startingFragment"
         android:name="com.testtask.ui.fragment.starting.StartingFragment"
-        tools:layout="@layout/starting_fragment" />
+        tools:layout="@layout/starting_fragment">
+
+        <action
+            android:id="@+id/action_startingFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+
+        <action
+            android:id="@+id/action_startingFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/authFragment"
         android:name="com.testtask.ui.fragment.auth.AuthFragment"
-        tools:layout="@layout/auth_fragment" />
+        tools:layout="@layout/auth_fragment">
+
+        <action
+            android:id="@+id/action_authFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.testtask.ui.fragment.main.MainFragment"
-        tools:layout="@layout/main_fragment" />
+        tools:layout="@layout/main_fragment">
+
+        <action
+            android:id="@+id/action_mainFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
 
 
 </navigation>
