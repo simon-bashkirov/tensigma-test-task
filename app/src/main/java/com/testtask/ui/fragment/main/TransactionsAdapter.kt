@@ -28,7 +28,7 @@ class TransactionsAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: TransactionItem) {
-            binding.setItem(item)
+            binding.item = item
             binding.executePendingBindings()
         }
     }
