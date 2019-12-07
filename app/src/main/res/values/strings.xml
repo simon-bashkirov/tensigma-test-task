@@ -4,4 +4,12 @@
     <string name="email_hint">E-mail</string>
     <string name="password_hint">Password</string>
     <string name="sign_in_button_caption">Sign in</string>
+    <string name="sign_out_button_caption">Sign out</string>
+    <string name="user_first_name_caption">First name:</string>
+    <string name="user_last_name_caption">Last name:</string>
+    <string name="user_email_caption">E-mail:</string>
+    <string name="transactions_total_caption">Transactions total:</string>
+    <string name="start_button_caption">Start</string>
+    <string name="stop_button_caption">Stop</string>
+    <string name="clear_button_caption">Clear</string>
 </resources>
