@@ -24,6 +24,7 @@
             android:layout_marginTop="@dimen/margin_normal"
             android:layout_marginEnd="@dimen/margin_large"
             android:text="@string/sign_out_button_caption"
+            android:onClick="@{() -> viewModel.signOutButtonClicked()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginEnd="@dimen/margin_normal"
+            android:text="@{viewModel.firstName}"
             android:ellipsize="marquee"
             android:singleLine="true"
             app:layout_constraintBottom_toBottomOf="@id/userFirstNameCaptionTextView"
@@ -76,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginEnd="@dimen/margin_normal"
+            android:text="@{viewModel.lastName}"
             android:ellipsize="marquee"
             android:scrollHorizontally="true"
             android:singleLine="true"
@@ -103,6 +106,7 @@
             android:layout_marginEnd="@dimen/margin_normal"
             android:ellipsize="marquee"
             android:scrollHorizontally="true"
+            android:text="@{viewModel.email}"
             android:singleLine="true"
             app:layout_constraintBottom_toBottomOf="@id/userEmailCaptionTextView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -139,6 +143,7 @@
             android:layout_marginEnd="@dimen/margin_normal"
             android:ellipsize="marquee"
             android:scrollHorizontally="true"
+            android:text="@{viewModel.total}"
             android:singleLine="true"
             app:layout_constraintBottom_toBottomOf="@id/transactionsTotalCaptionTextView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -154,6 +159,7 @@
             android:singleLine="true"
             android:text="@string/start_button_caption"
             app:layout_constraintBottom_toBottomOf="@id/stopButton"
+            android:onClick="@{() -> viewModel.startButtonClicked()}"
             app:layout_constraintEnd_toStartOf="@id/stopButton"
             app:layout_constraintTop_toTopOf="@id/stopButton" />
 
@@ -164,6 +170,7 @@
             android:layout_marginBottom="@dimen/margin_normal"
             android:text="@string/stop_button_caption"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="@{() -> viewModel.stopButtonClicked()}"
             app:layout_constraintEnd_toEndOf="@id/verticalCenterGuideLine"
             app:layout_constraintStart_toStartOf="@id/verticalCenterGuideLine" />
 
@@ -173,6 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_normal"
             android:text="@string/clear_button_caption"
+            android:onClick="@{() -> viewModel.clearButtonClicked()}"
             app:layout_constraintBottom_toBottomOf="@+id/stopButton"
             app:layout_constraintStart_toEndOf="@+id/stopButton"
             app:layout_constraintTop_toTopOf="@+id/stopButton" />
