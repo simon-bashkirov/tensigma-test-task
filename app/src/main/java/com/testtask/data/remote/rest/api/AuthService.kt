@@ -1,7 +1,5 @@
 package com.testtask.data.remote.rest.api
 
-import com.testtask.data.remote.rest.api.base.AuthorizedService
-import com.testtask.data.remote.rest.api.base.UnauthorizedService
 import com.testtask.data.remote.rest.model.request.SignInRequest
 import com.testtask.data.remote.rest.model.response.TokenResponse
 import io.reactivex.Completable
@@ -12,18 +10,18 @@ import retrofit2.http.POST
 
 interface AuthService {
 
-    interface SignInService : UnauthorizedService {
+    interface SignInService {
 
         @POST("accounts/auth")
         fun signIn(@Body signInRequest: SignInRequest): Single<TokenResponse>
     }
 
-    interface SignOutService : AuthorizedService {
+    interface SignOutService {
         @GET("accounts/sessions/end")
         fun signOut(): Completable
     }
 
-    interface RefreshTokenService : AuthorizedService {
+    interface RefreshTokenService {
 
         @GET("accounts/sessions/refresh")
         fun refreshToken(): Single<TokenResponse>

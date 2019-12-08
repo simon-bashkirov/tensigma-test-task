@@ -1,8 +1,6 @@
 package com.testtask.data.remote.rest.adapter.impl
 
 import com.testtask.data.remote.rest.adapter.RestAdapter
-import com.testtask.data.remote.rest.api.base.AuthorizedService
-import com.testtask.data.remote.rest.api.base.UnauthorizedService
 import com.testtask.data.repository.TokenProvider
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -11,14 +9,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitRestAdapter(private val apiBaseUrl: String) :
     RestAdapter {
 
-    override fun <Service : UnauthorizedService> createUnauthorizedService(serviceClass: Class<Service>) =
+    override fun <Service> createUnauthorizedService(serviceClass: Class<Service>) =
         OkHttpClient.Builder()
             .build()
             .let { client ->
                 buildService(client, serviceClass)
             }
 
-    override fun <Service : AuthorizedService> createAuthorizedService(
+    override fun <Service> createAuthorizedService(
         serviceClass: Class<Service>,
         tokenProvider: TokenProvider
     ) =
