@@ -3,11 +3,12 @@ package com.testtask.data.remote
 import com.testtask.data.remote.rest.adapter.RestAdapter
 import com.testtask.data.remote.rest.api.AuthService
 import com.testtask.data.remote.rest.model.request.SignInRequest
+import com.testtask.data.remote.rest.model.request.SignOutRequest
 import com.testtask.data.repository.auth.AuthDataSource
 import com.testtask.data.repository.auth.TokenProvider
 import io.reactivex.schedulers.Schedulers
 
-class AuthDataSourceImpl(restAdapter: RestAdapter, private val tokenProvider: TokenProvider) :
+class AuthDataSourceImpl(restAdapter: RestAdapter, tokenProvider: TokenProvider) :
     AuthDataSource {
 
     private val signInService =
@@ -23,22 +24,17 @@ class AuthDataSourceImpl(restAdapter: RestAdapter, private val tokenProvider: To
         tokenProvider
     )
 
-    override fun signIn(email: String, password: String) =
+    override fun requestToken(email: String, password: String) =
         signInService.signIn(SignInRequest(email, password))
-            .flatMapCompletable {
-                tokenProvider.saveToken(it.token)
-            }
+            .map { it.token }
             .subscribeOn(Schedulers.io())
 
-    override fun signOut() = signOutService
-        .signOut()
-        .doOnComplete {
-            tokenProvider.deleteToken()
-        }
-        .subscribeOn(Schedulers.io())
+    override fun endSession(sessionId: String) =
+        signOutService.signOut(SignOutRequest(sessionId))
+            .subscribeOn(Schedulers.io())
 
     override fun refreshToken() = refreshTokenService.refreshToken()
-        .flatMapCompletable { tokenProvider.saveToken(it.token) }
+        .map { it.token }
         .subscribeOn(Schedulers.io())
 
 }

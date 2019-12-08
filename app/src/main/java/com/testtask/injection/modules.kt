@@ -1,6 +1,7 @@
 package com.testtask.injection
 
 import com.testtask.R
+import com.testtask.data.local.TokenStorageImpl
 import com.testtask.data.local.TokenProviderImpl
 import com.testtask.data.remote.AuthDataSourceImpl
 import com.testtask.data.remote.UserDataSourceImpl
@@ -9,6 +10,7 @@ import com.testtask.data.remote.rest.adapter.impl.RetrofitRestAdapter
 import com.testtask.data.repository.auth.AuthDataSource
 import com.testtask.data.repository.auth.AuthRepositoryImpl
 import com.testtask.data.repository.auth.TokenProvider
+import com.testtask.data.repository.auth.TokenStorage
 import com.testtask.data.repository.user.UserDataSource
 import com.testtask.data.repository.user.UserRepositoryImpl
 import com.testtask.domain.interactor.auth.ObserveAuthStateUseCase
@@ -51,7 +53,13 @@ val uiModule = module {
 
 val dataModule = module {
 
-    single<TokenProvider> { TokenProviderImpl() }
+    single<TokenStorage> { TokenStorageImpl() }
+
+    single<TokenProvider> {
+        TokenProviderImpl(
+            tokenStorage = get()
+        )
+    }
 
     single<RestAdapter> {
         RetrofitRestAdapter(
@@ -84,7 +92,8 @@ val domainModule = module {
 
     single<AuthRepository> {
         AuthRepositoryImpl(
-            authDataSource = get()
+            authDataSource = get(),
+            tokenStorage = get()
         )
     }
 

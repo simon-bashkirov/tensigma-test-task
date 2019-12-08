@@ -64,9 +64,9 @@ class MainViewModel(
             signOutUseCase.execute(NoParams)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    //Sign out completed. Do nothing.
+                    Log.d("TAG", "Sign out completed")
                 }, {
-                    //TODO: show error state
+                    Log.d("TAG", it.toString())
                 })
         )
     }

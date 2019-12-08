@@ -1,6 +1,7 @@
 package com.testtask.data.remote.rest.api
 
 import com.testtask.data.remote.rest.model.request.SignInRequest
+import com.testtask.data.remote.rest.model.request.SignOutRequest
 import com.testtask.data.remote.rest.model.response.TokenResponse
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -17,8 +18,8 @@ interface AuthService {
     }
 
     interface SignOutService {
-        @GET("accounts/sessions/end")
-        fun signOut(): Completable
+        @POST("accounts/sessions/end")
+        fun signOut(@Body signOutRequest: SignOutRequest): Completable
     }
 
     interface RefreshTokenService {

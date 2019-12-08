@@ -1,12 +1,13 @@
 package com.testtask.data.repository.auth
 
 import io.reactivex.Completable
+import io.reactivex.Single
 
 interface AuthDataSource {
 
-    fun signIn(email: String, password: String): Completable
+    fun requestToken(email: String, password: String): Single<String>
 
-    fun signOut(): Completable
+    fun endSession(sessionId: String): Completable
 
-    fun refreshToken(): Completable
+    fun refreshToken(): Single<String>
 }
