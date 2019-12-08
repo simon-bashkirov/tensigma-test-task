@@ -1,4 +1,4 @@
-package com.testtask.data.repository
+package com.testtask.data.repository.auth
 
 import com.testtask.domain.repository.AuthRepository
 import com.testtask.domain.state.AuthState
@@ -10,12 +10,14 @@ class AuthRepositoryImpl(private val authDataSource: AuthDataSource) : AuthRepos
     private val authStatePublisher = BehaviorProcessor.create<AuthState>()
         .apply {
             //TODO in progress
-            onNext(AuthState.Authorized)
+            onNext(AuthState.UnAuthorized)
         }
 
     override fun signIn(email: String, password: String) =
         authDataSource.signIn(email, password)
-            .doOnComplete { authStatePublisher.onNext(AuthState.Authorized) }
+            .doOnComplete {
+                authStatePublisher.onNext(AuthState.Authorized)
+            }
 
 
     override fun signOut() = authDataSource.signOut()

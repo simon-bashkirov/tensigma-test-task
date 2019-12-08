@@ -1,6 +1,6 @@
 package com.testtask.data.local
 
-import com.testtask.data.repository.TokenProvider
+import com.testtask.data.repository.auth.TokenProvider
 import io.reactivex.Completable
 
 class TokenProviderImpl : TokenProvider {
@@ -9,7 +9,7 @@ class TokenProviderImpl : TokenProvider {
 
     override fun getToken() = token
 
-    override fun refreshToken(newToken: String): Completable {
+    override fun saveToken(newToken: String): Completable {
         token = newToken
         return Completable.complete()
     }
@@ -17,5 +17,9 @@ class TokenProviderImpl : TokenProvider {
     override fun deleteToken(): Completable {
         token = ""
         return Completable.complete()
+    }
+
+    override fun hasToken(): Boolean {
+        return token.isNotEmpty()
     }
 }

@@ -1,4 +1,4 @@
-package com.testtask.data.repository
+package com.testtask.data.repository.auth
 
 import io.reactivex.Completable
 
@@ -6,7 +6,9 @@ interface TokenProvider {
 
     fun getToken(): String
 
-    fun refreshToken(newToken: String): Completable
+    fun saveToken(newToken: String): Completable
 
     fun deleteToken(): Completable
+
+    fun hasToken(): Boolean
 }
