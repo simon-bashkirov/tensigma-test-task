@@ -1,25 +1,36 @@
 package com.testtask.ui.fragment.auth
 
-import android.util.Log
-import androidx.lifecycle.ViewModel
 import com.testtask.domain.interactor.auth.SignInUseCase
-import com.testtask.domain.interactor.auth.SignOutUseCase
+import com.testtask.domain.interactor.auth.SignInUseCase.Params
 import com.testtask.ui.livedata.ValueChangedLiveData
+import com.testtask.ui.viewmodel.DisposableViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 class AuthViewModel(
 
-    private val signInUseCase: SignInUseCase,
+    private val signInUseCase: SignInUseCase
 
-    private val signOutUseCase: SignOutUseCase
-
-) : ViewModel() {
+) : DisposableViewModel() {
 
     val eMailLiveData = ValueChangedLiveData<String>()
 
     val passWordLiveData = ValueChangedLiveData<String>()
 
     fun signInButtonClicked() {
-        Log.d("TAG", "email: ${eMailLiveData.value} password: ${passWordLiveData.value}")
+        addDisposable(
+            signInUseCase.execute(
+                Params(
+                    eMailLiveData.value ?: "",
+                    passWordLiveData.value ?: ""
+                )
+            )
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    //Sign in completed. Do nothing.
+                }, {
+                    //TODO: show error state
+                })
+        )
     }
 
 }

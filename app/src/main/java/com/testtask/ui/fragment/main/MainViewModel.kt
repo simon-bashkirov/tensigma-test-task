@@ -4,17 +4,38 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import com.testtask.domain.interactor.NoParams
+import com.testtask.domain.interactor.auth.SignOutUseCase
 import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
+import com.testtask.ui.mapper.ProfileMapper
 import com.testtask.ui.model.ProfileShort
 import com.testtask.ui.model.TransactionItem
+import com.testtask.ui.viewmodel.DisposableViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
 
-class MainViewModel(private val observeMyFirstProfileUseCase: ObserveMyFirstProfileUseCase) :
-    ViewModel() {
+class MainViewModel(
+    observeMyFirstProfileUseCase: ObserveMyFirstProfileUseCase,
+    private val signOutUseCase: SignOutUseCase
+) : DisposableViewModel() {
+
+    init {
+        addDisposable(
+            observeMyFirstProfileUseCase
+                .execute(ObserveMyFirstProfileUseCase.NoParams)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    profile.value = ProfileMapper.map(it)
+                }, {
+                    //TODO show error state
+                })
+        )
+    }
 
     private val profile = MutableLiveData<ProfileShort>()
 
-    val firstName = Transformations.map(profile) { it.firstName }
+    val firstName = Transformations.map(profile) {
+        it.firstName
+    }
 
     val lastName = Transformations.map(profile) { it.lastName }
 
@@ -39,7 +60,15 @@ class MainViewModel(private val observeMyFirstProfileUseCase: ObserveMyFirstProf
     }
 
     fun signOutButtonClicked() {
-        Log.d("TAG", "sign out button clicked")
+        addDisposable(
+            signOutUseCase.execute(NoParams)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    //Sign out completed. Do nothing.
+                }, {
+                    //TODO: show error state
+                })
+        )
     }
 
 }
