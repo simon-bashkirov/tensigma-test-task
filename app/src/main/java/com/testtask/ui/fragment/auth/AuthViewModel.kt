@@ -1,8 +1,8 @@
 package com.testtask.ui.fragment.auth
 
-import androidx.lifecycle.Transformations
 import com.testtask.domain.interactor.auth.SignInUseCase
 import com.testtask.domain.interactor.auth.SignInUseCase.Params
+import com.testtask.ui.livedata.SingleLiveEvent
 import com.testtask.ui.livedata.ValueChangedLiveData
 import com.testtask.ui.state.ProgressState
 import com.testtask.ui.viewmodel.DisposableViewModel

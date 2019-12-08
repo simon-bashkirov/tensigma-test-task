@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.findNavController
 import com.testtask.R
 import com.testtask.databinding.ActivityMainBinding
@@ -31,8 +32,7 @@ class MainActivity : AppCompatActivity() {
             }
             destination?.let {
                 val controller = findNavController(R.id.nav_host_fragment)
-                hideSoftKeyboard()
-                controller.navigate(destination)
+                controller.navigate(destination, Bundle().apply { NavOptionsBuilder().launchSingleTop })
             }
         }
         )
@@ -40,10 +40,5 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         finish()
-    }
-
-    private fun hideSoftKeyboard() {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-        imm?.hideSoftInputFromWindow(window.decorView.windowToken, 0)
     }
 }

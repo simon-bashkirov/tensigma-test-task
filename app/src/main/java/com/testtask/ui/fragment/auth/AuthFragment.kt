@@ -1,9 +1,11 @@
 package com.testtask.ui.fragment.auth
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -35,8 +37,11 @@ class AuthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.viewModel = viewModel
         viewModel.progressStateLiveData.observe(viewLifecycleOwner, Observer {
-            if (it is ProgressState.Error) {
-                Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+            when (it) {
+                is ProgressState.Progress -> hideSoftKeyboard(view)
+                is ProgressState.Error ->
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+
             }
         })
     }
@@ -44,5 +49,11 @@ class AuthFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    private fun hideSoftKeyboard(view: View) {
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
