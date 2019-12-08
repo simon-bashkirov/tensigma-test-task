@@ -1,11 +1,14 @@
 package com.testtask.data.remote.rest.adapter.impl
 
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.testtask.data.remote.rest.adapter.RestAdapter
 import com.testtask.data.repository.auth.TokenProvider
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class RetrofitRestAdapter(private val apiBaseUrl: String) :
     RestAdapter {
@@ -39,7 +42,14 @@ class RetrofitRestAdapter(private val apiBaseUrl: String) :
     private fun <Service> buildService(okHttpClient: OkHttpClient, serviceClass: Class<Service>) =
         Retrofit.Builder()
             .baseUrl(apiBaseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(
+                GsonConverterFactory.create(
+                    GsonBuilder()
+                        .setLenient()
+                        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                        .create()
+                )
+            )
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
             .build()
