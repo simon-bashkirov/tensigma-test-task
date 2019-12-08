@@ -3,12 +3,14 @@ package com.testtask.injection
 import com.testtask.R
 import com.testtask.data.local.TokenProviderImpl
 import com.testtask.data.remote.AuthDataSourceImpl
+import com.testtask.data.remote.UserDataSourceImpl
 import com.testtask.data.remote.rest.adapter.RestAdapter
 import com.testtask.data.remote.rest.adapter.impl.RetrofitRestAdapter
-import com.testtask.data.repository.AuthDataSource
-import com.testtask.data.repository.AuthRepositoryImpl
-import com.testtask.data.repository.TokenProvider
-import com.testtask.data.repository.UserRepsitoryImpl
+import com.testtask.data.repository.auth.AuthDataSource
+import com.testtask.data.repository.auth.AuthRepositoryImpl
+import com.testtask.data.repository.auth.TokenProvider
+import com.testtask.data.repository.user.UserDataSource
+import com.testtask.data.repository.user.UserRepsitoryImpl
 import com.testtask.domain.interactor.auth.ObserveAuthStateUseCase
 import com.testtask.domain.interactor.auth.SignInUseCase
 import com.testtask.domain.interactor.auth.SignOutUseCase
@@ -48,6 +50,7 @@ val uiModule = module {
 }
 
 val dataModule = module {
+
     single<TokenProvider> { TokenProviderImpl() }
 
     single<RestAdapter> {
@@ -55,8 +58,16 @@ val dataModule = module {
             apiBaseUrl = androidApplication().getString(R.string.api_base_url)
         )
     }
+
     single<AuthDataSource> {
         AuthDataSourceImpl(
+            restAdapter = get(),
+            tokenProvider = get()
+        )
+    }
+
+    single<UserDataSource> {
+        UserDataSourceImpl(
             restAdapter = get(),
             tokenProvider = get()
         )
@@ -65,7 +76,11 @@ val dataModule = module {
 
 val domainModule = module {
 
-    single<UserRepository> { UserRepsitoryImpl() }
+    single<UserRepository> {
+        UserRepsitoryImpl(
+            userDataSource = get()
+        )
+    }
 
     single<AuthRepository> {
         AuthRepositoryImpl(
