@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
     <data>
+
+        <import type="android.view.View"/>
 
         <variable
             name="viewModel"
@@ -46,6 +47,8 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/submitButton"
+            android:enabled="@{!viewModel.showProgressLiveData}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
@@ -55,5 +58,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/passwordTextView" />
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:visibility="@{viewModel.showProgressLiveData ? View.VISIBLE : View.INVISIBLE, default = invisible}"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/submitButton"
+          android:layout_marginTop="@dimen/margin_normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

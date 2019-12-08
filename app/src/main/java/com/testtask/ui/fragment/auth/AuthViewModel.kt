@@ -1,8 +1,10 @@
 package com.testtask.ui.fragment.auth
 
+import androidx.lifecycle.Transformations
 import com.testtask.domain.interactor.auth.SignInUseCase
 import com.testtask.domain.interactor.auth.SignInUseCase.Params
 import com.testtask.ui.livedata.ValueChangedLiveData
+import com.testtask.ui.state.ProgressState
 import com.testtask.ui.viewmodel.DisposableViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -17,6 +19,7 @@ class AuthViewModel(
     val passWordLiveData = ValueChangedLiveData<String>()
 
     fun signInButtonClicked() {
+        setProgressState(ProgressState.Progress)
         addDisposable(
             signInUseCase.execute(
                 Params(
@@ -26,9 +29,9 @@ class AuthViewModel(
             )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    //Sign in completed. Do nothing.
+                    setProgressState(ProgressState.Success)
                 }, {
-                    //TODO: show error state
+                    setProgressState(ProgressState.Error(it.message))
                 })
         )
     }
