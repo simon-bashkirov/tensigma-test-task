@@ -1,7 +1,8 @@
 package com.testtask.data.remote.rest.adapter.impl
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.testtask.data.remote.rest.adapter.RestAdapter
-import com.testtask.data.repository.TokenProvider
+import com.testtask.data.repository.auth.TokenProvider
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -39,6 +40,7 @@ class RetrofitRestAdapter(private val apiBaseUrl: String) :
         Retrofit.Builder()
             .baseUrl(apiBaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
             .build()
             .create(serviceClass)
