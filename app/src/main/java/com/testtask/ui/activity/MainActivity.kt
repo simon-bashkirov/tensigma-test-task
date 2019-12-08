@@ -1,6 +1,9 @@
 package com.testtask.ui.activity
 
+import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -28,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             }
             destination?.let {
                 val controller = findNavController(R.id.nav_host_fragment)
+                hideSoftKeyboard()
                 controller.navigate(destination)
             }
         }
@@ -36,5 +40,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         finish()
+    }
+
+    private fun hideSoftKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        imm?.hideSoftInputFromWindow(window.decorView.windowToken, 0)
     }
 }
