@@ -8,6 +8,10 @@ import io.reactivex.processors.BehaviorProcessor
 class AuthRepositoryImpl(private val authDataSource: AuthDataSource) : AuthRepository {
 
     private val authStatePublisher = BehaviorProcessor.create<AuthState>()
+        .apply {
+            //TODO in progress
+            onNext(AuthState.Authorized)
+        }
 
     override fun signIn(email: String, password: String) =
         authDataSource.signIn(email, password)

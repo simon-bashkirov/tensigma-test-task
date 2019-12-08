@@ -9,6 +9,7 @@ import com.testtask.data.repository.AuthDataSource
 import com.testtask.data.repository.AuthRepositoryImpl
 import com.testtask.data.repository.TokenProvider
 import com.testtask.data.repository.UserRepsitoryImpl
+import com.testtask.domain.interactor.auth.ObserveAuthStateUseCase
 import com.testtask.domain.interactor.auth.SignInUseCase
 import com.testtask.domain.interactor.auth.SignOutUseCase
 import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
@@ -73,6 +74,8 @@ val domainModule = module {
     }
 
     single { ObserveMyFirstProfileUseCase(userRepository = get()) }
+
+    single { ObserveAuthStateUseCase(authRepository = get()) }
 
     single { SignInUseCase(authRepository = get()) }
 
