@@ -2,9 +2,17 @@ package com.testtask.ui.fragment.auth
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.testtask.domain.interactor.auth.SignInUseCase
+import com.testtask.domain.interactor.auth.SignOutUseCase
 import com.testtask.ui.livedata.ValueChangedLiveData
 
-class AuthViewModel : ViewModel() {
+class AuthViewModel(
+
+    private val signInUseCase: SignInUseCase,
+
+    private val signOutUseCase: SignOutUseCase
+
+) : ViewModel() {
 
     val eMailLiveData = ValueChangedLiveData<String>()
 

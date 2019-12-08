@@ -15,11 +15,24 @@ val uiModule = module {
 
     viewModel { StartingViewModel() }
 
-    viewModel { AuthViewModel() }
+    viewModel {
+        AuthViewModel(
+            signInUseCase = get(),
+            signOutUseCase = get()
+        )
+    }
 
-    viewModel { MainViewModel() }
+    viewModel {
+        MainViewModel(
+            observeMyFirstProfileUseCase = get()
+        )
+    }
 
-    viewModel { MainActivityViewModel() }
+    viewModel {
+        MainActivityViewModel(
+            observeAuthStateUse = get()
+        )
+    }
 }
 
 val domainModule = module {

@@ -5,10 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
 import com.testtask.ui.model.ProfileShort
 import com.testtask.ui.model.TransactionItem
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val observeMyFirstProfileUseCase: ObserveMyFirstProfileUseCase) :
+    ViewModel() {
 
     private val profile = MutableLiveData<ProfileShort>()
 

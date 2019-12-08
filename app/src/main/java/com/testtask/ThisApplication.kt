@@ -1,6 +1,7 @@
 package com.testtask
 
 import android.app.Application
+import com.testtask.injection.domainModule
 import com.testtask.injection.uiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -12,7 +13,12 @@ class ThisApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@ThisApplication)
-            modules(uiModule)
+            modules(
+                listOf(
+                    uiModule,
+                    domainModule
+                )
+            )
         }
     }
 }
