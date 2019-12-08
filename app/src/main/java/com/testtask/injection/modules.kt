@@ -10,7 +10,7 @@ import com.testtask.data.repository.auth.AuthDataSource
 import com.testtask.data.repository.auth.AuthRepositoryImpl
 import com.testtask.data.repository.auth.TokenProvider
 import com.testtask.data.repository.user.UserDataSource
-import com.testtask.data.repository.user.UserRepsitoryImpl
+import com.testtask.data.repository.user.UserRepositoryImpl
 import com.testtask.domain.interactor.auth.ObserveAuthStateUseCase
 import com.testtask.domain.interactor.auth.SignInUseCase
 import com.testtask.domain.interactor.auth.SignOutUseCase
@@ -77,7 +77,7 @@ val dataModule = module {
 val domainModule = module {
 
     single<UserRepository> {
-        UserRepsitoryImpl(
+        UserRepositoryImpl(
             userDataSource = get()
         )
     }

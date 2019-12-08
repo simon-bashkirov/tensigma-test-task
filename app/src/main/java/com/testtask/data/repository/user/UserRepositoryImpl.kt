@@ -6,7 +6,7 @@ import com.testtask.domain.repository.UserRepository
 import io.reactivex.Flowable
 import io.reactivex.processors.BehaviorProcessor
 
-class UserRepsitoryImpl(private val userDataSource: UserDataSource) : UserRepository {
+class UserRepositoryImpl(private val userDataSource: UserDataSource) : UserRepository {
 
     private val userPublisher = BehaviorProcessor.create<UserInfo>()
 
