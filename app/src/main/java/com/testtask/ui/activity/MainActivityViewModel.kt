@@ -8,8 +8,9 @@ import com.testtask.ui.livedata.ValueChangedLiveData
 import com.testtask.ui.viewmodel.DisposableViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-class MainActivityViewModel(private val observeAuthStateUse: ObserveAuthStateUseCase) :
+class MainActivityViewModel(observeAuthStateUse: ObserveAuthStateUseCase) :
     DisposableViewModel() {
+
     init {
         addDisposable(
             observeAuthStateUse.execute(NoParams)

@@ -17,7 +17,7 @@ class AuthRepositoryImpl(private val authDataSource: AuthDataSource) : AuthRepos
         authDataSource.signIn(email, password)
             .doOnComplete {
                 authStatePublisher.onNext(AuthState.Authorized)
-            }
+            } as Completable
 
 
     override fun signOut() = authDataSource.signOut()
