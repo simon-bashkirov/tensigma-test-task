@@ -32,10 +32,8 @@ class AuthRepositoryImpl(
 
     override fun signOut() = authDataSource
         .endSession(tokenStorage.getSessionId())
-        .andThen { tokenStorage.deleteToken() }
-        .doOnComplete {
-            authStatePublisher.onNext(AuthState.UnAuthorized)
-        } as Completable
+        .doOnSubscribe {  authStatePublisher.onNext(AuthState.UnAuthorized) }
+        .andThen { tokenStorage.deleteToken() } as Completable
 
     override fun getAuthState() = authStatePublisher
 }
