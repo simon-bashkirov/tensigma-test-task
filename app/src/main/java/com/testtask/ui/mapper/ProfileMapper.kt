@@ -6,7 +6,7 @@ import com.testtask.ui.model.ProfileShort
 
 object ProfileMapper : Mapper<Profile, ProfileShort> {
 
-    override fun mapTo(source: Profile) =
+    override fun map(source: Profile) =
         source.run {
             ProfileShort(
                 firstName = firstName,
