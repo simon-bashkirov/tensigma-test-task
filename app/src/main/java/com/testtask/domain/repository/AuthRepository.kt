@@ -10,5 +10,5 @@ interface AuthRepository {
 
     fun signOut(): Completable
 
-    fun getAuthStatus(): Flowable<AuthState>
+    fun getAuthState(): Flowable<AuthState>
 }
