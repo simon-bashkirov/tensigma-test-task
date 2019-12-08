@@ -3,6 +3,7 @@
     package="com.testtask">
 
     <application
+        android:name=".ThisApplication"
         android:allowBackup="true"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"

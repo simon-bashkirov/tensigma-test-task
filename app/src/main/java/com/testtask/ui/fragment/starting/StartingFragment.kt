@@ -6,13 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.testtask.R
 import com.testtask.databinding.FragmentStartingBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class StartingFragment : Fragment() {
 
     private var binding: FragmentStartingBinding? = null
+
+    private val viewModel: StartingViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +29,7 @@ class StartingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.viewModel = ViewModelProviders.of(this).get(StartingViewModel::class.java)
+        binding?.viewModel = viewModel
     }
 
     override fun onDestroyView() {
