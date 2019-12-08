@@ -8,10 +8,10 @@ class SignInUseCase(private val authRepository: AuthRepository) :
 
     override fun execute(params: Params) =
         authRepository.signIn(
-            login = params.login,
+            email = params.email,
             password = params.password
         )
 
-    data class Params(val login: String, val password: String)
+    data class Params(val email: String, val password: String)
 
 }

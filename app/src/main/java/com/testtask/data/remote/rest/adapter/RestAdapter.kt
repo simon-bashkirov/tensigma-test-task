@@ -1,8 +1,8 @@
 package com.testtask.data.remote.rest.adapter
 
-import com.testtask.data.remote.rest.TokenProvider
 import com.testtask.data.remote.rest.api.base.AuthorizedService
 import com.testtask.data.remote.rest.api.base.UnauthorizedService
+import com.testtask.data.repository.TokenProvider
 
 interface RestAdapter {
 

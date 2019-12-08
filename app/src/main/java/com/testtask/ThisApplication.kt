@@ -1,6 +1,7 @@
 package com.testtask
 
 import android.app.Application
+import com.testtask.injection.dataModule
 import com.testtask.injection.domainModule
 import com.testtask.injection.uiModule
 import org.koin.android.ext.koin.androidContext
@@ -16,6 +17,7 @@ class ThisApplication : Application() {
             modules(
                 listOf(
                     uiModule,
+                    dataModule,
                     domainModule
                 )
             )

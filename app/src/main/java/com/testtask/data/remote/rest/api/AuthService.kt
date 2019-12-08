@@ -15,7 +15,7 @@ interface AuthService {
     interface SignInService : UnauthorizedService {
 
         @POST("accounts/auth")
-        fun signIn(@Body signInRequest: SignInRequest): Completable
+        fun signIn(@Body signInRequest: SignInRequest): Single<TokenResponse>
     }
 
     interface SignOutService : AuthorizedService {

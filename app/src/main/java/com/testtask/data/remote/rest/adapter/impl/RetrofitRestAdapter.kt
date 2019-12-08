@@ -1,9 +1,9 @@
 package com.testtask.data.remote.rest.adapter.impl
 
-import com.testtask.data.remote.rest.TokenProvider
 import com.testtask.data.remote.rest.adapter.RestAdapter
 import com.testtask.data.remote.rest.api.base.AuthorizedService
 import com.testtask.data.remote.rest.api.base.UnauthorizedService
+import com.testtask.data.repository.TokenProvider
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
