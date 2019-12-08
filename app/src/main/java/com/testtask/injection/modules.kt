@@ -2,6 +2,9 @@ package com.testtask.injection
 
 import com.testtask.data.repository.AuthRepositoryImpl
 import com.testtask.data.repository.UserRepsitoryImpl
+import com.testtask.domain.interactor.auth.SignInUseCase
+import com.testtask.domain.interactor.auth.SignOutUseCase
+import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
 import com.testtask.domain.repository.AuthRepository
 import com.testtask.domain.repository.UserRepository
 import com.testtask.ui.activity.MainActivityViewModel
@@ -17,14 +20,14 @@ val uiModule = module {
 
     viewModel {
         AuthViewModel(
-            signInUseCase = get(),
-            signOutUseCase = get()
+            signInUseCase = get()
         )
     }
 
     viewModel {
         MainViewModel(
-            observeMyFirstProfileUseCase = get()
+            observeMyFirstProfileUseCase = get(),
+            signOutUseCase = get()
         )
     }
 
@@ -40,6 +43,12 @@ val domainModule = module {
     single<UserRepository> { UserRepsitoryImpl() }
 
     single<AuthRepository> { AuthRepositoryImpl() }
+
+    single { ObserveMyFirstProfileUseCase(userRepository = get()) }
+
+    single { SignInUseCase(authRepository = get()) }
+
+    single { SignOutUseCase(authRepository = get()) }
 
 }
 
