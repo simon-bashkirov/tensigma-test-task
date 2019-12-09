@@ -4,9 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.testtask.domain.interactor.CompletableInteractor
 import com.testtask.domain.interactor.NoParams
 import com.testtask.domain.interactor.auth.SignOutUseCase
+import com.testtask.domain.interactor.transaction.ClearTransactionsUseCase
 import com.testtask.domain.interactor.transaction.ObserveTransactionUpdatesUseCase
+import com.testtask.domain.interactor.transaction.StartTransactionsUseCase
+import com.testtask.domain.interactor.transaction.StopTransactionsUseCase
 import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
 import com.testtask.ui.mapper.ProfileMapper
 import com.testtask.ui.mapper.TransactionMapper
@@ -19,6 +23,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class MainViewModel(
     observeMyFirstProfileUseCase: ObserveMyFirstProfileUseCase,
     observeTransactionUpdatesUseCase: ObserveTransactionUpdatesUseCase,
+    private val startTransactionsUseCase: StartTransactionsUseCase,
+    private val stopTransactionsUseCase: StopTransactionsUseCase,
+    private val clearTransactionsUseCase: ClearTransactionsUseCase,
     private val signOutUseCase: SignOutUseCase
 ) : DisposableViewModel() {
 
@@ -71,15 +78,15 @@ class MainViewModel(
     val total = _total as LiveData<String>
 
     fun startButtonClicked() {
-        Log.d("TAG", "start button clicked")
+        processCompletableUseCase(startTransactionsUseCase)
     }
 
     fun stopButtonClicked() {
-        Log.d("TAG", "stop button clicked")
+        processCompletableUseCase(stopTransactionsUseCase)
     }
 
     fun clearButtonClicked() {
-        Log.d("TAG", "clear button clicked")
+        processCompletableUseCase(clearTransactionsUseCase)
     }
 
     fun signOutButtonClicked() {
@@ -92,6 +99,16 @@ class MainViewModel(
                     Log.d("TAG", it.toString())
                 })
         )
+    }
+
+    private fun processCompletableUseCase(useCase: CompletableInteractor<NoParams>) {
+        addDisposable(
+            useCase
+                .execute(NoParams)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
+        )
+
     }
 
 }

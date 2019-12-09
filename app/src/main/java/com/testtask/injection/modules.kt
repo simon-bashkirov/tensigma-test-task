@@ -53,7 +53,10 @@ val uiModule = module {
         MainViewModel(
             observeTransactionUpdatesUseCase = get(),
             observeMyFirstProfileUseCase = get(),
-            signOutUseCase = get()
+            signOutUseCase = get(),
+            startTransactionsUseCase = get(),
+            stopTransactionsUseCase = get(),
+            clearTransactionsUseCase = get()
         )
     }
 
