@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.testtask.ui.fragment.main.MainViewModel" />
@@ -112,6 +114,18 @@
             app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
             app:layout_constraintTop_toTopOf="@id/userEmailCaptionTextView"
             tools:text="john-smith@gmail.com" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:visibility="@{viewModel.showProgressLiveData ? View.VISIBLE : View.INVISIBLE, default = invisible}"
+            app:layout_constraintBottom_toTopOf="@id/userEmailOutputTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
+            app:layout_constraintTop_toTopOf="@id/userFirstNameOutputTextView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/transactionsRecyclerView"

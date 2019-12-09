@@ -10,6 +10,7 @@ import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
 import com.testtask.ui.mapper.ProfileMapper
 import com.testtask.ui.model.ProfileShort
 import com.testtask.ui.model.TransactionItem
+import com.testtask.ui.state.ProgressState
 import com.testtask.ui.viewmodel.DisposableViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -19,14 +20,16 @@ class MainViewModel(
 ) : DisposableViewModel() {
 
     init {
+        setProgressState(ProgressState.Progress)
         addDisposable(
             observeMyFirstProfileUseCase
                 .execute(ObserveMyFirstProfileUseCase.NoParams)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
+                    setProgressState(ProgressState.Success)
                     profile.value = ProfileMapper.map(it)
                 }, {
-                    //TODO show error state
+                    setProgressState(ProgressState.Error(it.message))
                 })
         )
     }
