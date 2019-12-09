@@ -1,5 +1,7 @@
 package com.testtask.data.remote.rest.adapter.impl
 
+import com.facebook.stetho.Stetho
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -15,6 +17,7 @@ class RetrofitRestAdapter(private val apiBaseUrl: String) :
 
     override fun <Service> createUnauthorizedService(serviceClass: Class<Service>) =
         OkHttpClient.Builder()
+            .addNetworkInterceptor( StethoInterceptor())
             .build()
             .let { client ->
                 buildService(client, serviceClass)
@@ -25,6 +28,7 @@ class RetrofitRestAdapter(private val apiBaseUrl: String) :
         authTokenProvider: AuthTokenProvider
     ) =
         OkHttpClient.Builder()
+            .addNetworkInterceptor( StethoInterceptor())
             .addInterceptor { chain ->
                 val request = chain
                     .request()

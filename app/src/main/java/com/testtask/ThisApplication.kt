@@ -1,6 +1,7 @@
 package com.testtask
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import com.testtask.injection.dataModule
 import com.testtask.injection.domainModule
 import com.testtask.injection.uiModule
@@ -12,6 +13,7 @@ import org.koin.core.context.startKoin
 class ThisApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        Stetho.initializeWithDefaults(this)
         startKoin {
             androidLogger()
             androidContext(this@ThisApplication)

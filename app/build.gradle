@@ -52,6 +52,9 @@ dependencies {
     implementation("com.auth0.android:jwtdecode:$jwt_version") {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
+    implementation "com.facebook.stetho:stetho:$stetho_version"
+    implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
+    implementation "com.facebook.stetho:stetho-okhttp:$stetho_version"
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
