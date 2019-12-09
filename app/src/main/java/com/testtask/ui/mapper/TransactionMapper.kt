@@ -12,11 +12,12 @@ object TransactionMapper : Mapper<Transaction, TransactionItem> {
     override fun map(source: Transaction) =
         source.run {
             TransactionItem(
-                hashOutput = this.x?.hash ?: "n/a",
-                timeOutput = this.x?.time?.let { simpleDateFormat.format(it) } ?: "n/a",
-                //TODO get it clear
-                valueBtcOutput = "xz",
-                valueUsdOutput = "xz"
+
+                hashOutput = x?.hash ?: "n/a",
+
+                timeOutput = x?.time?.let { simpleDateFormat.format(it) } ?: "",
+
+                valueBtcOutput = x?.out?.sumByDouble { it.value.toDouble().div(100_000_000) } ?: 0.0
             )
         }
 }
