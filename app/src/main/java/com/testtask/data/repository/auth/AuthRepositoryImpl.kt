@@ -18,13 +18,14 @@ class AuthRepositoryImpl(
     private var refreshTask: ScheduledFuture<*>? = null
 
     private val authStatePublisher = BehaviorProcessor.create<AuthState>()
-        .apply {
-            if (authLocalDataSource.hasToken() && !authLocalDataSource.isExpired()) {
-                onNext(AuthState.Authorized)
-            } else {
-                onNext(AuthState.UnAuthorized)
-            }
+
+    init {
+        if (authLocalDataSource.hasToken()) {
+            refreshToken()
+        } else {
+            authStatePublisher.onNext(AuthState.UnAuthorized)
         }
+    }
 
     override fun signIn(email: String, password: String) =
         authRemoteDataSource.requestToken(email, password)
