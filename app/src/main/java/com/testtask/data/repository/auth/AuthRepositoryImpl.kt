@@ -49,8 +49,9 @@ class AuthRepositoryImpl(
 
 
     private fun scheduleNextRefresh(delayMs: Long) {
+        val validDelay = if (delayMs < 0) 0 else delayMs
         refreshTask = refreshTokenExecutor.schedule(
-            { refreshToken() }, delayMs, TimeUnit.MILLISECONDS
+            { refreshToken() }, validDelay, TimeUnit.MILLISECONDS
         )
     }
 
