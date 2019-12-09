@@ -16,9 +16,9 @@ class AuthLocalDataSourceImpl(private val stringLocalStorage: LocalStorage<Strin
         stringLocalStorage.get(KEY_STORAGE_TOKEN)?.let { onNextToken(it) }
     }
 
-    override fun expiringSoon() =
-        tokenProcessor.value?.expiresAt?.let { (it.time - System.currentTimeMillis()) in 0..ADVANCE_BEFORE_EXPIRING }
-            ?: false
+    override fun refreshDelay() =
+        tokenProcessor.value?.expiresAt?.let { it.time - System.currentTimeMillis() - ADVANCE_BEFORE_EXPIRING }
+            ?: ADVANCE_BEFORE_EXPIRING
 
 
     override fun isExpired() =

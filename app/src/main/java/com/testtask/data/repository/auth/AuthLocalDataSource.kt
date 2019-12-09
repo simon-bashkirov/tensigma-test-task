@@ -10,7 +10,7 @@ interface AuthLocalDataSource : AuthTokenProvider {
 
     fun hasToken(): Boolean
 
-    fun expiringSoon(): Boolean
+    fun refreshDelay(): Long
 
     fun isExpired(): Boolean
 
