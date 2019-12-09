@@ -1,6 +1,5 @@
 package com.testtask.data.remote.rest.adapter.impl
 
-import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
