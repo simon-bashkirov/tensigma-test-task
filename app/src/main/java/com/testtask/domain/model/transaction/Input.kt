@@ -4,7 +4,7 @@ import java.util.*
 
 data class Input(
 
-    val sequence: Int?,
+    val sequence: Long?,
 
     val prevOut: PrevOut?,
 

@@ -6,13 +6,13 @@ data class Out(
 
     val spent: Boolean,
 
-    val txIndex: Int,
+    val txIndex: Long,
 
     val type: Int,
 
     val addr: String,
 
-    val value: Int,
+    val value: Long,
 
     val n: Int,
 
