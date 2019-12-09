@@ -7,7 +7,7 @@ import io.reactivex.processors.BehaviorProcessor
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class AuthLocalDataSourceImpl : AuthLocalDataSource {
+class AuthLocalDataSourceImpl (private val stringLocalStorage: LocalStorage<String>) : AuthLocalDataSource {
 
     private val tokenProcessor = BehaviorProcessor.create<Token>()
 
