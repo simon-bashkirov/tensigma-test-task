@@ -30,16 +30,24 @@ class TransactionRepositoryImpl(private val transactionDataSource: TransactionDa
     @SuppressLint("CheckResult")
     private fun subscribeToTransactions() {
         transactionDataSource.getTransactionStream()
-            .subscribe({
-                val list = transactionUpdatesPublisher.value ?: emptyList()
-                transactionUpdatesPublisher.onNext(
-                    ArrayList(list).apply {
-                        add(0, it)
+            .onBackpressureBuffer()
+            .map {
+                (transactionUpdatesPublisher.value ?: emptyList())
+                    .toMutableList()
+                    .apply {
+                        add(it)
+                        if (size > MAX_LIST_SIZE) remove(first())
                     }
-                )
-            },
-                {
-                    transactionUpdatesPublisher.onError(it)
-                })
+                    .sortedBy { it.x?.time }
+            }
+            .subscribe({
+                transactionUpdatesPublisher.onNext(it)
+            }, {
+                transactionUpdatesPublisher.onError(it)
+            })
+    }
+
+    companion object {
+        private const val MAX_LIST_SIZE = 10
     }
 }

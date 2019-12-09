@@ -41,6 +41,7 @@ class MainFragment : Fragment() {
         }
         viewModel.transactions.observe(viewLifecycleOwner, Observer {
             transactionsAdapter.submitList(it)
+            binding?.transactionsRecyclerView?.smoothScrollToPosition(transactionsAdapter.itemCount)
         })
 
         viewModel.progressStateLiveData.observe(viewLifecycleOwner, Observer {

@@ -2,6 +2,7 @@ package com.testtask.domain.model.transaction
 
 import java.util.*
 
+@Suppress("unused")
 data class Input(
 
     val sequence: Long?,

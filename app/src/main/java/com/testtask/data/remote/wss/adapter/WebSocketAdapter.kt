@@ -9,4 +9,6 @@ interface WebSocketAdapter {
     fun disconnect()
 
     fun getMessageStream(): Flowable<String>
+
+    fun sendMessage(string: String)
 }

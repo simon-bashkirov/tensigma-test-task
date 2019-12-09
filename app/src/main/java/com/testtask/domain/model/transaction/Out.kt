@@ -2,6 +2,7 @@ package com.testtask.domain.model.transaction
 
 import java.util.*
 
+@Suppress("unused")
 data class Out(
 
     val spent: Boolean,
