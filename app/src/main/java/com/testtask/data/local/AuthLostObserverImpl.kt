@@ -3,6 +3,7 @@ package com.testtask.data.local
 import com.testtask.data.repository.auth.AuthLostObserver
 import com.testtask.domain.repository.TransactionRepository
 import com.testtask.domain.repository.UserRepository
+import io.reactivex.Completable
 
 class AuthLostObserverImpl(
     private val userRepository: UserRepository,
@@ -14,5 +15,6 @@ class AuthLostObserverImpl(
         userRepository.clearCurrentUser()
             .andThen { transactionRepository.stopTransactionStream() }
             .andThen { transactionRepository.clearTransactionCache() }
+                as Completable
 
 }
