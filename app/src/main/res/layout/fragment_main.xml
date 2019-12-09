@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,9 +13,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragment.main.MainFragment">
@@ -127,19 +127,50 @@
             app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
             app:layout_constraintTop_toTopOf="@id/userFirstNameOutputTextView" />
 
+        <include
+            android:id="@+id/transactionsHeader"
+            layout="@layout/item_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            app:hashOutput="@{@string/hash_caption}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userEmailCaptionTextView"
+            app:timeOutput="@{@string/time_caption}"
+            app:valueOutput="@{@string/btc_caption}" />
+
+        <View
+            android:id="@+id/tableTopDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/transactionsHeader" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/transactionsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_normal"
             android:layout_marginBottom="@dimen/margin_normal"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/transactionsTotalCaptionTextView"
+            app:layout_constraintBottom_toTopOf="@+id/tableBottomDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userEmailCaptionTextView"
+            app:layout_constraintTop_toBottomOf="@id/tableTopDivider"
             tools:listitem="@layout/item_transaction" />
+
+        <View
+            android:id="@+id/tableBottomDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintBottom_toTopOf="@id/transactionsTotalCaptionTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/transactionsTotalCaptionTextView"
@@ -165,7 +196,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
             app:layout_constraintTop_toTopOf="@id/transactionsTotalCaptionTextView"
-            tools:text="10000 USD" />
+            tools:text="10000" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/startButton"

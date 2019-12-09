@@ -53,12 +53,12 @@ class MainViewModel(
         addDisposable(
             observeTransactionUpdatesUseCase
                 .execute(NoParams)
-                .map { list ->
-                    list.map { TransactionMapper.map(it) }
-                }
+                .map { list -> list.map { TransactionMapper.map(it) } }
+                .map { list -> list.sumByDouble { it.valueBtcOutput } to list }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    _transactions.value = it
+                .subscribe({ (totalValue, list) ->
+                    _total.value = "%.8f BTC".format(totalValue)
+                    _transactions.value = list
                 }
                     , {
                         setProgressState(ProgressState.Error(it.message))

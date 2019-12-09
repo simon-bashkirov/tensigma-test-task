@@ -12,4 +12,7 @@
     <string name="start_button_caption">Start</string>
     <string name="stop_button_caption">Stop</string>
     <string name="clear_button_caption">Clear</string>
+    <string name="hash_caption">Hash</string>
+    <string name="time_caption">Time</string>
+    <string name="btc_caption">BTC</string>
 </resources>
