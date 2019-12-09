@@ -7,9 +7,14 @@ import io.reactivex.processors.BehaviorProcessor
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class AuthLocalDataSourceImpl (private val stringLocalStorage: LocalStorage<String>) : AuthLocalDataSource {
+class AuthLocalDataSourceImpl(private val stringLocalStorage: LocalStorage<String>) :
+    AuthLocalDataSource {
 
     private val tokenProcessor = BehaviorProcessor.create<Token>()
+
+    init {
+        stringLocalStorage.get(KEY_STORAGE_TOKEN)?.let { onNextToken(it) }
+    }
 
     override fun expiringSoon() =
         tokenProcessor.value?.expiresAt?.let { (it.time - System.currentTimeMillis()) in 0..ADVANCE_BEFORE_EXPIRING }
@@ -23,14 +28,8 @@ class AuthLocalDataSourceImpl (private val stringLocalStorage: LocalStorage<Stri
     override fun getToken() = tokenProcessor.value?.string ?: ""
 
     override fun saveToken(newToken: String) = Completable.fromCallable {
-        val jwt = JWT(newToken)
-        tokenProcessor.onNext(
-            Token(
-                string = newToken,
-                expiresAt = jwt.expiresAt,
-                sessionId = jwt.getClaim("session_id").asString() ?: ""
-            )
-        )
+        stringLocalStorage.save(KEY_STORAGE_TOKEN, newToken)
+        onNextToken(newToken)
     }
 
     override fun deleteToken() = Completable.fromCallable {
@@ -43,6 +42,16 @@ class AuthLocalDataSourceImpl (private val stringLocalStorage: LocalStorage<Stri
 
     override fun getSessionId() = tokenProcessor.value?.sessionId ?: ""
 
+    private fun onNextToken(token: String) {
+        val jwt = JWT(token)
+        tokenProcessor.onNext(
+            Token(
+                string = token,
+                expiresAt = jwt.expiresAt,
+                sessionId = jwt.getClaim("session_id").asString() ?: ""
+            )
+        )
+    }
 
     private data class Token(
         val string: String,
@@ -55,5 +64,6 @@ class AuthLocalDataSourceImpl (private val stringLocalStorage: LocalStorage<Stri
 
     companion object {
         private val ADVANCE_BEFORE_EXPIRING = TimeUnit.MINUTES.toMillis(1)
+        private const val KEY_STORAGE_TOKEN = "storage.token"
     }
 }
