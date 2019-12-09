@@ -1,6 +1,5 @@
 package com.testtask.ui.fragment.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -21,12 +20,19 @@ import com.testtask.ui.viewmodel.DisposableViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 class MainViewModel(
+
     observeMyFirstProfileUseCase: ObserveMyFirstProfileUseCase,
+
     observeTransactionUpdatesUseCase: ObserveTransactionUpdatesUseCase,
+
     private val startTransactionsUseCase: StartTransactionsUseCase,
+
     private val stopTransactionsUseCase: StopTransactionsUseCase,
+
     private val clearTransactionsUseCase: ClearTransactionsUseCase,
+
     private val signOutUseCase: SignOutUseCase
+
 ) : DisposableViewModel() {
 
     init {
@@ -90,15 +96,7 @@ class MainViewModel(
     }
 
     fun signOutButtonClicked() {
-        addDisposable(
-            signOutUseCase.execute(NoParams)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    Log.d("TAG", "Sign out completed")
-                }, {
-                    Log.d("TAG", it.toString())
-                })
-        )
+        processCompletableUseCase(signOutUseCase)
     }
 
     private fun processCompletableUseCase(useCase: CompletableInteractor<NoParams>) {
