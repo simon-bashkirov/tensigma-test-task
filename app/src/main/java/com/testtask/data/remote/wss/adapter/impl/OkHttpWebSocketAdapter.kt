@@ -8,7 +8,7 @@ import okhttp3.*
 import okio.ByteString
 
 
-class WebSocketAdapterImpl(wssBaseUrl: String) : WebSocketAdapter {
+class OkHttpWebSocketAdapter(wssBaseUrl: String) : WebSocketAdapter {
 
     private val client = OkHttpClient.Builder().build()
     private val request = Request.Builder().url(wssBaseUrl).build()

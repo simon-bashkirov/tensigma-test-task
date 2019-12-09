@@ -10,9 +10,12 @@ import com.testtask.data.remote.rest.AuthRemoteDataSourceImpl
 import com.testtask.data.remote.rest.UserDataSourceImpl
 import com.testtask.data.remote.rest.adapter.RestAdapter
 import com.testtask.data.remote.rest.adapter.impl.RetrofitRestAdapter
+import com.testtask.data.remote.wss.TransactionWssDataSource
 import com.testtask.data.remote.wss.adapter.WebSocketAdapter
-import com.testtask.data.remote.wss.adapter.impl.WebSocketAdapterImpl
+import com.testtask.data.remote.wss.adapter.impl.OkHttpWebSocketAdapter
 import com.testtask.data.repository.auth.*
+import com.testtask.data.repository.transaction.TransactionDataSource
+import com.testtask.data.repository.transaction.TransactionRepositoryImpl
 import com.testtask.data.repository.user.UserDataSource
 import com.testtask.data.repository.user.UserRepositoryImpl
 import com.testtask.domain.interactor.auth.ObserveAuthStateUseCase
@@ -24,6 +27,7 @@ import com.testtask.domain.interactor.transaction.StartTransactionsUseCase
 import com.testtask.domain.interactor.transaction.StopTransactionsUseCase
 import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
 import com.testtask.domain.repository.AuthRepository
+import com.testtask.domain.repository.TransactionRepository
 import com.testtask.domain.repository.UserRepository
 import com.testtask.ui.activity.MainActivityViewModel
 import com.testtask.ui.fragment.auth.AuthViewModel
@@ -105,8 +109,14 @@ val dataModule = module {
     }
 
     single<WebSocketAdapter> {
-        WebSocketAdapterImpl(
+        OkHttpWebSocketAdapter(
             wssBaseUrl = androidApplication().getString(R.string.wss_base_url)
+        )
+    }
+
+    single<TransactionDataSource> {
+        TransactionWssDataSource(
+            webSocketAdapter = get()
         )
     }
 
@@ -125,6 +135,12 @@ val domainModule = module {
             authRemoteDataSource = get(),
             authLocalDataSource = get(),
             authLostObserver = get()
+        )
+    }
+
+    single<TransactionRepository> {
+        TransactionRepositoryImpl(
+            transactionDataSource = get()
         )
     }
 
