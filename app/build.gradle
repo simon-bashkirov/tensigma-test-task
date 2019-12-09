@@ -4,9 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-apply from: 'lib_versions.gradle'
-
 apply plugin: 'kotlin-kapt'
+
+apply from: 'lib_versions.gradle'
 
 android {
     compileSdkVersion 29
@@ -34,27 +34,44 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //AndroidX
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-    implementation "com.google.android.material:material:$android_material_version"
     implementation "androidx.legacy:legacy-support-v4:$legacy_suppor_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extensions_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_viewmodel_ktx_version"
+
+    implementation "com.google.android.material:material:$android_material_version"
+
+    //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //ReactiveX
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+
+    //Koin
     implementation "org.koin:koin-android-viewmodel:$koin_version"
+
+    //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofit_rx_adapter_version"
+
+    //Jwt
     implementation("com.auth0.android:jwtdecode:$jwt_version") {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
+
+    //Stetho
     implementation "com.facebook.stetho:stetho:$stetho_version"
     implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
     implementation "com.facebook.stetho:stetho-okhttp:$stetho_version"
+
+    //Tests
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
