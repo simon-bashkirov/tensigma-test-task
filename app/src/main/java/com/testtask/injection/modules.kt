@@ -2,6 +2,7 @@ package com.testtask.injection
 
 import com.testtask.R
 import com.testtask.data.local.AuthLocalDataSourceImpl
+import com.testtask.data.local.AuthLostObserverImpl
 import com.testtask.data.local.AuthTokenProviderImpl
 import com.testtask.data.local.LocalStorage
 import com.testtask.data.local.pref.StringPrefLocalStorage
@@ -9,10 +10,7 @@ import com.testtask.data.remote.AuthRemoteDataSourceImpl
 import com.testtask.data.remote.UserDataSourceImpl
 import com.testtask.data.remote.rest.adapter.RestAdapter
 import com.testtask.data.remote.rest.adapter.impl.RetrofitRestAdapter
-import com.testtask.data.repository.auth.AuthLocalDataSource
-import com.testtask.data.repository.auth.AuthRemoteDataSource
-import com.testtask.data.repository.auth.AuthRepositoryImpl
-import com.testtask.data.repository.auth.AuthTokenProvider
+import com.testtask.data.repository.auth.*
 import com.testtask.data.repository.user.UserDataSource
 import com.testtask.data.repository.user.UserRepositoryImpl
 import com.testtask.domain.interactor.auth.ObserveAuthStateUseCase
@@ -71,18 +69,25 @@ val dataModule = module {
         )
     }
 
-    single<RestAdapter> {
-        RetrofitRestAdapter(
-            apiBaseUrl = androidApplication().getString(R.string.api_base_url)
-        )
-    }
-
     single<AuthRemoteDataSource> {
         AuthRemoteDataSourceImpl(
             restAdapter = get(),
             authTokenProvider = get()
         )
     }
+
+    single<AuthLostObserver> {
+        AuthLostObserverImpl(
+            userRepository = get()
+        )
+    }
+
+    single<RestAdapter> {
+        RetrofitRestAdapter(
+            apiBaseUrl = androidApplication().getString(R.string.api_base_url)
+        )
+    }
+
 
     single<UserDataSource> {
         UserDataSourceImpl(
@@ -103,7 +108,8 @@ val domainModule = module {
     single<AuthRepository> {
         AuthRepositoryImpl(
             authRemoteDataSource = get(),
-            authLocalDataSource = get()
+            authLocalDataSource = get(),
+            authLostObserver = get()
         )
     }
 

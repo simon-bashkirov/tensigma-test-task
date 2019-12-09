@@ -25,9 +25,11 @@ class MainViewModel(
             observeMyFirstProfileUseCase
                 .execute(ObserveMyFirstProfileUseCase.NoParams)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    setProgressState(ProgressState.Success)
-                    profile.value = ProfileMapper.map(it)
+                .subscribe({ optProfile ->
+                    optProfile.value?.let {
+                        setProgressState(ProgressState.Success)
+                        profile.value = ProfileMapper.map(it)
+                    }
                 }, {
                     setProgressState(ProgressState.Error(it.message))
                 })

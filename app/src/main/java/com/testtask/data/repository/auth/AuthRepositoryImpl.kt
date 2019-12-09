@@ -11,7 +11,9 @@ import java.util.concurrent.TimeUnit
 
 class AuthRepositoryImpl(
     private val authRemoteDataSource: AuthRemoteDataSource,
-    private val authLocalDataSource: AuthLocalDataSource
+    private val authLocalDataSource: AuthLocalDataSource,
+    private val authLostObserver: AuthLostObserver
+
 ) : AuthRepository {
 
     private val refreshTokenExecutor = Executors.newSingleThreadScheduledExecutor()
@@ -23,7 +25,7 @@ class AuthRepositoryImpl(
         if (authLocalDataSource.hasToken()) {
             refreshToken()
         } else {
-            authStatePublisher.onNext(AuthState.UnAuthorized)
+            setUnauthorized()
         }
     }
 
@@ -41,7 +43,7 @@ class AuthRepositoryImpl(
         .endSession(authLocalDataSource.getSessionId())
         .doOnSubscribe {
             refreshTask?.cancel(false)
-            authStatePublisher.onNext(AuthState.UnAuthorized)
+            setUnauthorized()
         }
         .doOnComplete { authLocalDataSource.deleteToken() } as Completable
 
@@ -64,7 +66,12 @@ class AuthRepositoryImpl(
             .subscribe({
                 authStatePublisher.onNext(AuthState.Authorized)
             }, {
-                authStatePublisher.onNext(AuthState.UnAuthorized)
+                setUnauthorized()
             })
+    }
+
+    private fun setUnauthorized() {
+        authStatePublisher.onNext(AuthState.UnAuthorized)
+        authLostObserver.onAuthLost().subscribe()
     }
 }
