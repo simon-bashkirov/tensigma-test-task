@@ -60,7 +60,7 @@ class AuthRepositoryImpl(
         authRemoteDataSource.refreshToken()
             .doOnSubscribe { authStatePublisher.onNext(AuthState.RefreshingBackground) }
             .flatMapCompletable { authLocalDataSource.saveToken(it) }
-            .andThen { scheduleNextRefresh(authLocalDataSource.refreshDelay()) }
+            .doOnComplete { scheduleNextRefresh(authLocalDataSource.refreshDelay()) }
             .subscribe({
                 authStatePublisher.onNext(AuthState.Authorized)
             }, {
