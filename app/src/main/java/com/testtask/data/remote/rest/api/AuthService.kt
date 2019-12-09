@@ -24,7 +24,7 @@ interface AuthService {
 
     interface RefreshTokenService {
 
-        @GET("accounts/sessions/refresh")
+        @POST("accounts/sessions/refresh")
         fun refreshToken(): Single<TokenResponse>
     }
 }
