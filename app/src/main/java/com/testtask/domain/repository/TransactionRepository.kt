@@ -12,5 +12,5 @@ interface TransactionRepository {
 
     fun clearTransactionCache(): Completable
 
-    fun getTransactionStream(): Flowable<Transaction>
+    fun getTransactionListUpdates(): Flowable<List<Transaction>>
 }

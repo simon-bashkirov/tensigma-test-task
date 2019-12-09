@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.testtask.domain.interactor.NoParams
 import com.testtask.domain.interactor.auth.SignOutUseCase
+import com.testtask.domain.interactor.transaction.ObserveTransactionUpdatesUseCase
 import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
 import com.testtask.ui.mapper.ProfileMapper
+import com.testtask.ui.mapper.TransactionMapper
 import com.testtask.ui.model.ProfileShort
 import com.testtask.ui.model.TransactionItem
 import com.testtask.ui.state.ProgressState
@@ -16,6 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class MainViewModel(
     observeMyFirstProfileUseCase: ObserveMyFirstProfileUseCase,
+    observeTransactionUpdatesUseCase: ObserveTransactionUpdatesUseCase,
     private val signOutUseCase: SignOutUseCase
 ) : DisposableViewModel() {
 
@@ -23,7 +26,7 @@ class MainViewModel(
         setProgressState(ProgressState.Progress)
         addDisposable(
             observeMyFirstProfileUseCase
-                .execute(ObserveMyFirstProfileUseCase.NoParams)
+                .execute(NoParams)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ optProfile ->
                     optProfile.value?.let {
@@ -34,7 +37,22 @@ class MainViewModel(
                     setProgressState(ProgressState.Error(it.message))
                 })
         )
+        addDisposable(
+            observeTransactionUpdatesUseCase
+                .execute(NoParams)
+                .map { list ->
+                    list.map { TransactionMapper.map(it) }
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    _transactions.value = it
+                }
+                    , {
+                        setProgressState(ProgressState.Error(it.message))
+                    })
+        )
     }
+
 
     private val profile = MutableLiveData<ProfileShort>()
 

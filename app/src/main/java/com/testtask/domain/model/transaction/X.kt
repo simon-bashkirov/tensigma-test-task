@@ -12,7 +12,7 @@ class X(
 
     val inputs: List<Input>,
 
-    val time: Int,
+    val time: Long,
 
     val txIndex: Int,
 

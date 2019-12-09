@@ -22,7 +22,7 @@ import com.testtask.domain.interactor.auth.ObserveAuthStateUseCase
 import com.testtask.domain.interactor.auth.SignInUseCase
 import com.testtask.domain.interactor.auth.SignOutUseCase
 import com.testtask.domain.interactor.transaction.ClearTransactionsUseCase
-import com.testtask.domain.interactor.transaction.ObserveTransactionStreamUseCase
+import com.testtask.domain.interactor.transaction.ObserveTransactionUpdatesUseCase
 import com.testtask.domain.interactor.transaction.StartTransactionsUseCase
 import com.testtask.domain.interactor.transaction.StopTransactionsUseCase
 import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
@@ -51,6 +51,7 @@ val uiModule = module {
 
     viewModel {
         MainViewModel(
+            observeTransactionUpdatesUseCase = get(),
             observeMyFirstProfileUseCase = get(),
             signOutUseCase = get()
         )
@@ -158,7 +159,7 @@ val domainModule = module {
 
     single { ClearTransactionsUseCase(transactionRepository = get()) }
 
-    single { ObserveTransactionStreamUseCase(transactionRepository = get()) }
+    single { ObserveTransactionUpdatesUseCase(transactionRepository = get()) }
 
 }
 
