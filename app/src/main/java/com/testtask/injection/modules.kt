@@ -94,7 +94,8 @@ val dataModule = module {
 
     single<AuthLostObserver> {
         AuthLostObserverImpl(
-            userRepository = get()
+            userRepository = get(),
+            transactionRepository = get()
         )
     }
 
