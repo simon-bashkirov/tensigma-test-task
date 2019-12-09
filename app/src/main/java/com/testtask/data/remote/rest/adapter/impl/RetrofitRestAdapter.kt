@@ -4,7 +4,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.testtask.data.remote.rest.adapter.RestAdapter
-import com.testtask.data.repository.auth.TokenProvider
+import com.testtask.data.repository.auth.AuthTokenProvider
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,14 +22,14 @@ class RetrofitRestAdapter(private val apiBaseUrl: String) :
 
     override fun <Service> createAuthorizedService(
         serviceClass: Class<Service>,
-        tokenProvider: TokenProvider
+        authTokenProvider: AuthTokenProvider
     ) =
         OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val request = chain
                     .request()
                     .newBuilder()
-                    .addHeader("Authorization", "Bearer ${tokenProvider.getToken()}")
+                    .addHeader("Authorization", "Bearer ${authTokenProvider.getToken()}")
                     .build()
                 chain.proceed(request)
             }

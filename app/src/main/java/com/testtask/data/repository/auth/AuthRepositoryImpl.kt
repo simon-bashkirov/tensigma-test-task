@@ -6,13 +6,13 @@ import io.reactivex.Completable
 import io.reactivex.processors.BehaviorProcessor
 
 class AuthRepositoryImpl(
-    private val authDataSource: AuthDataSource,
-    private val tokenStorage: TokenStorage
+    private val authRemoteDataSource: AuthRemoteDataSource,
+    private val authLocalDataSource: AuthLocalDataSource
 ) : AuthRepository {
 
     private val authStatePublisher = BehaviorProcessor.create<AuthState>()
         .apply {
-            if (tokenStorage.hasToken() && !tokenStorage.isExpired()) {
+            if (authLocalDataSource.hasToken() && !authLocalDataSource.isExpired()) {
                 onNext(AuthState.Authorized)
             } else {
                 onNext(AuthState.UnAuthorized)
@@ -20,20 +20,20 @@ class AuthRepositoryImpl(
         }
 
     override fun signIn(email: String, password: String) =
-        authDataSource.requestToken(email, password)
+        authRemoteDataSource.requestToken(email, password)
             .doOnSubscribe { authStatePublisher.onNext(AuthState.RefreshingForeground) }
             .flatMapCompletable {
-                tokenStorage.saveToken(it)
+                authLocalDataSource.saveToken(it)
             }
             .doOnComplete {
                 authStatePublisher.onNext(AuthState.Authorized)
             } as Completable
 
 
-    override fun signOut() = authDataSource
-        .endSession(tokenStorage.getSessionId())
-        .doOnSubscribe {  authStatePublisher.onNext(AuthState.UnAuthorized) }
-        .andThen { tokenStorage.deleteToken() } as Completable
+    override fun signOut() = authRemoteDataSource
+        .endSession(authLocalDataSource.getSessionId())
+        .doOnSubscribe { authStatePublisher.onNext(AuthState.UnAuthorized) }
+        .andThen { authLocalDataSource.deleteToken() } as Completable
 
     override fun getAuthState() = authStatePublisher
 }

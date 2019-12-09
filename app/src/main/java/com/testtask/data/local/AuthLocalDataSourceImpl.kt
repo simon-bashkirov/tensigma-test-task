@@ -1,13 +1,13 @@
 package com.testtask.data.local
 
 import com.auth0.android.jwt.JWT
-import com.testtask.data.repository.auth.TokenStorage
+import com.testtask.data.repository.auth.AuthLocalDataSource
 import io.reactivex.Completable
 import io.reactivex.processors.BehaviorProcessor
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class TokenStorageImpl : TokenStorage {
+class AuthLocalDataSourceImpl : AuthLocalDataSource {
 
     private val tokenProcessor = BehaviorProcessor.create<Token>()
 

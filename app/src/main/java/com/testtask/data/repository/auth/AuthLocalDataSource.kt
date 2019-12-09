@@ -2,7 +2,7 @@ package com.testtask.data.repository.auth
 
 import io.reactivex.Completable
 
-interface TokenStorage : TokenProvider {
+interface AuthLocalDataSource : AuthTokenProvider {
 
     fun saveToken(newToken: String): Completable
 

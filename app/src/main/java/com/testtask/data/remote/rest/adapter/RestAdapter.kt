@@ -1,6 +1,6 @@
 package com.testtask.data.remote.rest.adapter
 
-import com.testtask.data.repository.auth.TokenProvider
+import com.testtask.data.repository.auth.AuthTokenProvider
 
 interface RestAdapter {
 
@@ -8,7 +8,7 @@ interface RestAdapter {
 
     fun <Service> createAuthorizedService(
         serviceClass: Class<Service>,
-        tokenProvider: TokenProvider
+        authTokenProvider: AuthTokenProvider
     ): Service
 
 }

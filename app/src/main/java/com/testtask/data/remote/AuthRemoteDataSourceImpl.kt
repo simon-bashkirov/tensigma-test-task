@@ -4,24 +4,24 @@ import com.testtask.data.remote.rest.adapter.RestAdapter
 import com.testtask.data.remote.rest.api.AuthService
 import com.testtask.data.remote.rest.model.request.SignInRequest
 import com.testtask.data.remote.rest.model.request.SignOutRequest
-import com.testtask.data.repository.auth.AuthDataSource
-import com.testtask.data.repository.auth.TokenProvider
+import com.testtask.data.repository.auth.AuthRemoteDataSource
+import com.testtask.data.repository.auth.AuthTokenProvider
 import io.reactivex.schedulers.Schedulers
 
-class AuthDataSourceImpl(restAdapter: RestAdapter, tokenProvider: TokenProvider) :
-    AuthDataSource {
+class AuthRemoteDataSourceImpl(restAdapter: RestAdapter, authTokenProvider: AuthTokenProvider) :
+    AuthRemoteDataSource {
 
     private val signInService =
         restAdapter.createUnauthorizedService(AuthService.SignInService::class.java)
 
     private val signOutService = restAdapter.createAuthorizedService(
         AuthService.SignOutService::class.java,
-        tokenProvider
+        authTokenProvider
     )
 
     private val refreshTokenService = restAdapter.createAuthorizedService(
         AuthService.RefreshTokenService::class.java,
-        tokenProvider
+        authTokenProvider
     )
 
     override fun requestToken(email: String, password: String) =

@@ -1,7 +1,7 @@
 package com.testtask.data.repository.auth
 
 
-interface TokenProvider {
+interface AuthTokenProvider {
 
     fun getToken(): String
 
