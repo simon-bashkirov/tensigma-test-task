@@ -18,6 +18,10 @@ import com.testtask.data.repository.user.UserRepositoryImpl
 import com.testtask.domain.interactor.auth.ObserveAuthStateUseCase
 import com.testtask.domain.interactor.auth.SignInUseCase
 import com.testtask.domain.interactor.auth.SignOutUseCase
+import com.testtask.domain.interactor.transaction.ClearTransactionsUseCase
+import com.testtask.domain.interactor.transaction.ObserveTransactionStreamUseCase
+import com.testtask.domain.interactor.transaction.StartTransactionsUseCase
+import com.testtask.domain.interactor.transaction.StopTransactionsUseCase
 import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
 import com.testtask.domain.repository.AuthRepository
 import com.testtask.domain.repository.UserRepository
@@ -131,6 +135,14 @@ val domainModule = module {
     single { SignInUseCase(authRepository = get()) }
 
     single { SignOutUseCase(authRepository = get()) }
+
+    single { StartTransactionsUseCase(transactionRepository = get()) }
+
+    single { StopTransactionsUseCase(transactionRepository = get()) }
+
+    single { ClearTransactionsUseCase(transactionRepository = get()) }
+
+    single { ObserveTransactionStreamUseCase(transactionRepository = get()) }
 
 }
 
