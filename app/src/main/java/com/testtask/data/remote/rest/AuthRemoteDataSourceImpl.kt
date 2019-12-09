@@ -1,4 +1,4 @@
-package com.testtask.data.remote
+package com.testtask.data.remote.rest
 
 import com.testtask.data.remote.rest.adapter.RestAdapter
 import com.testtask.data.remote.rest.api.AuthService

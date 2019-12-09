@@ -6,8 +6,8 @@ import com.testtask.data.local.AuthLostObserverImpl
 import com.testtask.data.local.AuthTokenProviderImpl
 import com.testtask.data.local.LocalStorage
 import com.testtask.data.local.pref.StringPrefLocalStorage
-import com.testtask.data.remote.AuthRemoteDataSourceImpl
-import com.testtask.data.remote.UserDataSourceImpl
+import com.testtask.data.remote.rest.AuthRemoteDataSourceImpl
+import com.testtask.data.remote.rest.UserDataSourceImpl
 import com.testtask.data.remote.rest.adapter.RestAdapter
 import com.testtask.data.remote.rest.adapter.impl.RetrofitRestAdapter
 import com.testtask.data.repository.auth.*
