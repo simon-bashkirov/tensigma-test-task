@@ -20,7 +20,7 @@
             android:id="@+id/singOutButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
             android:onClick="@{() -> viewModel.signOutButtonClicked()}"
             android:text="@string/sign_out_button_caption"
             app:layout_constraintEnd_toEndOf="@+id/clearButton"
@@ -113,11 +113,31 @@
             app:layout_constraintTop_toTopOf="@id/userEmailCaptionTextView"
             tools:text="john-smith@gmail.com" />
 
+        <include
+            android:id="@+id/transactionsHeader"
+            layout="@layout/item_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:hashOutput="@{@string/hash_caption}"
+            app:layout_constraintEnd_toEndOf="@+id/transactionsRecyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/singOutButton"
+            app:timeOutput="@{@string/time_caption}"
+            app:valueOutput="@{@string/btc_caption}" />
+
+        <View
+            android:id="@+id/tableTopDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="@+id/transactionsRecyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/transactionsHeader" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/transactionsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_normal"
             android:layout_marginEnd="@dimen/margin_normal"
             android:layout_marginBottom="@dimen/margin_normal"
             android:orientation="vertical"
@@ -125,7 +145,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/startButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableTopDivider"
             tools:listitem="@layout/item_transaction" />
 
         <TextView
@@ -170,7 +190,7 @@
             android:id="@+id/stopButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_small"
             android:onClick="@{() -> viewModel.stopButtonClicked()}"
             android:text="@string/stop_button_caption"
             app:layout_constraintBottom_toBottomOf="parent"
