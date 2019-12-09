@@ -33,10 +33,7 @@ class AuthRepositoryImpl(
         authRemoteDataSource.requestToken(email, password)
             .doOnSubscribe { authStatePublisher.onNext(AuthState.RefreshingForeground) }
             .flatMapCompletable { authLocalDataSource.saveToken(it) }
-            .doOnComplete {
-                scheduleNextRefresh(authLocalDataSource.refreshDelay())
-                authStatePublisher.onNext(AuthState.Authorized)
-            } as Completable
+            .doOnComplete { setAuthorized() } as Completable
 
 
     override fun signOut() = authRemoteDataSource
@@ -50,6 +47,16 @@ class AuthRepositoryImpl(
     override fun getAuthState() = authStatePublisher
 
 
+    private fun setAuthorized() {
+        authStatePublisher.onNext(AuthState.Authorized)
+        scheduleNextRefresh(authLocalDataSource.refreshDelay())
+    }
+
+    private fun setUnauthorized() {
+        authStatePublisher.onNext(AuthState.UnAuthorized)
+        authLostObserver.onAuthLost().subscribe()
+    }
+
     private fun scheduleNextRefresh(delayMs: Long) {
         val validDelay = if (delayMs < 0) 0 else delayMs
         refreshTask = refreshTokenExecutor.schedule(
@@ -62,16 +69,11 @@ class AuthRepositoryImpl(
         authRemoteDataSource.refreshToken()
             .doOnSubscribe { authStatePublisher.onNext(AuthState.RefreshingBackground) }
             .flatMapCompletable { authLocalDataSource.saveToken(it) }
-            .doOnComplete { scheduleNextRefresh(authLocalDataSource.refreshDelay()) }
             .subscribe({
-                authStatePublisher.onNext(AuthState.Authorized)
+                setAuthorized()
             }, {
                 setUnauthorized()
             })
     }
 
-    private fun setUnauthorized() {
-        authStatePublisher.onNext(AuthState.UnAuthorized)
-        authLostObserver.onAuthLost().subscribe()
-    }
 }
