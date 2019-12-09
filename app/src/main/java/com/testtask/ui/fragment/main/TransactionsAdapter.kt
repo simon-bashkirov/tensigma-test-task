@@ -28,8 +28,12 @@ class TransactionsAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: TransactionItem) {
-            binding.item = item
-            binding.executePendingBindings()
+            with(binding) {
+                hashOutput = item.hashOutput
+                timeOutput = item.timeOutput
+                valueOutput = "%.8f".format(item.valueBtcOutput)
+                executePendingBindings()
+            }
         }
     }
 
