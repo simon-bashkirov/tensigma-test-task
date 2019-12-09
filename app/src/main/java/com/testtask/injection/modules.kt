@@ -10,6 +10,8 @@ import com.testtask.data.remote.rest.AuthRemoteDataSourceImpl
 import com.testtask.data.remote.rest.UserDataSourceImpl
 import com.testtask.data.remote.rest.adapter.RestAdapter
 import com.testtask.data.remote.rest.adapter.impl.RetrofitRestAdapter
+import com.testtask.data.remote.wss.adapter.WebSocketAdapter
+import com.testtask.data.remote.wss.adapter.impl.WebSocketAdapterImpl
 import com.testtask.data.repository.auth.*
 import com.testtask.data.repository.user.UserDataSource
 import com.testtask.data.repository.user.UserRepositoryImpl
@@ -29,7 +31,9 @@ import org.koin.dsl.module
 
 val uiModule = module {
 
-    viewModel { StartingViewModel() }
+    viewModel {
+        StartingViewModel()
+    }
 
     viewModel {
         AuthViewModel(
@@ -95,6 +99,13 @@ val dataModule = module {
             tokenProvider = get()
         )
     }
+
+    single<WebSocketAdapter> {
+        WebSocketAdapterImpl(
+            wssBaseUrl = androidApplication().getString(R.string.wss_base_url)
+        )
+    }
+
 }
 
 val domainModule = module {
