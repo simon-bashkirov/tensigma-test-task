@@ -40,9 +40,9 @@ class TransactionsAdapter :
     private class TransactionDiffCallback : DiffUtil.ItemCallback<TransactionItem>() {
 
         override fun areItemsTheSame(oldItem: TransactionItem, newItem: TransactionItem) =
-            oldItem == newItem
+            oldItem.hashOutput == newItem.hashOutput
 
         override fun areContentsTheSame(oldItem: TransactionItem, newItem: TransactionItem) =
-            oldItem.hashOutput == newItem.hashOutput
+            oldItem == newItem
     }
 }
