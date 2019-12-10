@@ -14,20 +14,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitRestAdapter(private val apiBaseUrl: String) :
     RestAdapter {
 
-    override fun <Service> createUnauthorizedService(serviceClass: Class<Service>) =
+    private val baseClient =
         OkHttpClient.Builder()
-            .addNetworkInterceptor( StethoInterceptor())
+            .addNetworkInterceptor(StethoInterceptor())
             .build()
-            .let { client ->
-                buildService(client, serviceClass)
-            }
+
+    override fun <Service> createUnauthorizedService(serviceClass: Class<Service>) =
+        buildService(baseClient, serviceClass)
 
     override fun <Service> createAuthorizedService(
         serviceClass: Class<Service>,
         authTokenProvider: AuthTokenProvider
-    ) =
-        OkHttpClient.Builder()
-            .addNetworkInterceptor( StethoInterceptor())
+    ) = baseClient
+            .newBuilder()
             .addInterceptor { chain ->
                 val request = chain
                     .request()
