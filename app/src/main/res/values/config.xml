@@ -2,6 +2,4 @@
 <resources>
     <string name="api_base_url" translatable="false">https://api.dev.karta.com/</string>
     <string name="wss_base_url" translatable="false">wss://ws.blockchain.info/inv</string>
-    <string name="subscribe_op" translatable="false">unconfirmed_sub</string>
-    <string name="unsubscribe_op" translatable="false">unconfirmed_unsub</string>
 </resources>

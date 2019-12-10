@@ -121,9 +121,7 @@ val dataModule = module {
 
     single<TransactionDataSource> {
         TransactionWssDataSource(
-            webSocketAdapter = get(),
-            subscribeOp = androidApplication().getString(R.string.subscribe_op),
-            unsubscribeOp = androidApplication().getString(R.string.unsubscribe_op)
+            webSocketAdapter = get()
         )
     }
 
