@@ -42,7 +42,7 @@ class AuthRepositoryImpl(
             refreshTask?.cancel(false)
             setUnauthorized()
         }
-        .doOnComplete { authLocalDataSource.deleteToken() } as Completable
+        .andThen(authLocalDataSource.deleteToken()) as Completable
 
     override fun getAuthState() = authStatePublisher
 

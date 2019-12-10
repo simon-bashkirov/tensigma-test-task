@@ -13,8 +13,8 @@ class AuthLostObserverImpl(
 
     override fun onAuthLost() =
         userRepository.clearCurrentUser()
-            .andThen { transactionRepository.stopTransactionStream() }
-            .andThen { transactionRepository.clearTransactionCache() }
+            .andThen(transactionRepository.stopTransactionStream())
+            .andThen(transactionRepository.clearTransactionCache())
                 as Completable
 
 }
