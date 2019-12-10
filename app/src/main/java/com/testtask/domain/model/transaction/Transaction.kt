@@ -3,11 +3,29 @@ package com.testtask.domain.model.transaction
 import java.util.*
 
 @Suppress("unused")
-data class Transaction(
+class Transaction(
 
-    val op: String?,
+    val lockTime: Int,
 
-    val x: X?,
+    val ver: Int,
+
+    val size: Int,
+
+    val inputs: List<Input>,
+
+    val time: Long,
+
+    val txIndex: Int,
+
+    val vinSz: Int,
+
+    val hash: String,
+
+    val voutSz: Int,
+
+    val relayedBy: String,
+
+    val out: List<Out>?,
 
     val additionalProperties: HashMap<String, Any>?
 )

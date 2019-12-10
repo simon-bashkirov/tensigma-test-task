@@ -1,13 +1,15 @@
-package com.testtask.data.remote.wss.model
+package com.testtask.data.remote.wss.model.command
 
 import com.google.gson.annotations.SerializedName
 
-enum class SocketCommand {
+enum class SocketCommandType {
 
     @SerializedName("unconfirmed_sub")
     SUBSCRIBE,
 
     @SerializedName("unconfirmed_unsub")
-    UNSUBSCRIBE
+    UNSUBSCRIBE,
 
+    @SerializedName("ping")
+    PING
 }

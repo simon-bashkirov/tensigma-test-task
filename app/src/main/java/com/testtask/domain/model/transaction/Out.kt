@@ -17,8 +17,6 @@ data class Out(
 
     val n: Int,
 
-    val script: String,
-
-    val additionalProperties: HashMap<String, Any>?
+    val script: String
 )
 

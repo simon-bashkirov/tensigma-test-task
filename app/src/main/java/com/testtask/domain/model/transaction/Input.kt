@@ -1,6 +1,5 @@
 package com.testtask.domain.model.transaction
 
-import java.util.*
 
 @Suppress("unused")
 data class Input(
@@ -9,7 +8,5 @@ data class Input(
 
     val prevOut: PrevOut?,
 
-    val script: String?,
-
-    val additionalProperties: HashMap<String, Any>?
+    val script: String?
 )

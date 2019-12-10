@@ -38,7 +38,7 @@ class TransactionRepositoryImpl(private val transactionDataSource: TransactionDa
                         add(it)
                         if (size > MAX_LIST_SIZE) remove(first())
                     }
-                    .sortedBy { it.x?.time }
+                    .sortedBy { it.time }
             }
             .subscribe({
                 transactionUpdatesPublisher.onNext(it)

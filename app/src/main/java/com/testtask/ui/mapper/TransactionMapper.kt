@@ -13,11 +13,11 @@ object TransactionMapper : Mapper<Transaction, TransactionItem> {
         source.run {
             TransactionItem(
 
-                hashOutput = x?.hash ?: "n/a",
+                hashOutput = hash,
 
-                timeOutput = x?.time?.let { simpleDateFormat.format(it) } ?: "",
+                timeOutput = simpleDateFormat.format(time),
 
-                valueBtcOutput = x?.out?.sumByDouble { it.value.toDouble().div(100_000_000) } ?: 0.0
+                valueBtcOutput = out?.sumByDouble { it.value.toDouble().div(100_000_000) } ?: 0.0
             )
         }
 }
