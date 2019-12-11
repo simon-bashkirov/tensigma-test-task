@@ -8,6 +8,5 @@ data class BitcoinSocketMessage(
     val type: SocketMessageType,
 
     @SerializedName("x")
-    val payload: Any?
-
+    val payload: Any? = null
 )

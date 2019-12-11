@@ -7,6 +7,7 @@ import com.testtask.data.remote.wss.mapper.MessageMapper
 import com.testtask.data.remote.wss.service.SocketService
 import io.reactivex.Flowable
 import io.reactivex.processors.PublishProcessor
+import io.reactivex.schedulers.Schedulers
 
 class SocketServiceImpl<Command, Message>(
 
@@ -25,11 +26,22 @@ class SocketServiceImpl<Command, Message>(
         subscribeToStream()
     }
 
+    override fun connect() {
+        socketClient.connect()
+    }
+
+    override fun disconnect() {
+        socketClient.disconnect()
+    }
+
+    override fun connectionState() = socketClient.connectionState()
+
     override fun sendCommand(command: Command) {
         socketClient.sendRawMessage(commandMapper.map(command))
     }
 
-    override fun getMessageStream() = messagePublisher as Flowable<Message>
+    override fun getMessageStream() =
+        (messagePublisher as Flowable<Message>).subscribeOn(Schedulers.io())
 
 
     @SuppressLint("CheckResult")
@@ -41,6 +53,5 @@ class SocketServiceImpl<Command, Message>(
             }, {
                 //TODO
             })
-
     }
 }

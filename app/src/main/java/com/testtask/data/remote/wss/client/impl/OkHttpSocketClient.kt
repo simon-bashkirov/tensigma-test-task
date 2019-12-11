@@ -1,6 +1,8 @@
 package com.testtask.data.remote.wss.client.impl
 
 import com.testtask.data.remote.wss.client.SocketClient
+import com.testtask.data.remote.wss.client.state.ConnectionState
+import com.testtask.data.remote.wss.client.state.ConnectionState.*
 import io.reactivex.Flowable
 import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.processors.PublishProcessor
@@ -16,14 +18,14 @@ class OkHttpSocketClient(wssBaseUrl: String) : SocketClient {
 
     private val webSocketProcessor = BehaviorProcessor.create<WebSocket>()
 
-    private val connectionState = BehaviorProcessor.create<ConnectionState>()
+    private val connectionStateProcessor = BehaviorProcessor.create<ConnectionState>()
 
     private val messagePublisher = PublishProcessor.create<String>()
 
     private val listener = object : WebSocketListener() {
 
         override fun onOpen(webSocket: WebSocket, response: Response) {
-            connectionState.onNext(ConnectionState.Connected)
+            connectionStateProcessor.onNext(Connected)
         }
 
         override fun onMessage(webSocket: WebSocket?, text: String?) {
@@ -40,25 +42,25 @@ class OkHttpSocketClient(wssBaseUrl: String) : SocketClient {
         }
 
         override fun onClosed(webSocket: WebSocket?, code: Int, reason: String?) {
-            if (connectionState.value is ConnectionState.Closing) {
-                connectionState.onNext(
-                    ConnectionState.ClosedNormal
+            if (connectionStateProcessor.value is Closing) {
+                connectionStateProcessor.onNext(
+                    ClosedNormal
                 )
             } else {
-                connectionState.onNext(ConnectionState.ClosedError)
+                connectionStateProcessor.onNext(ClosedError)
             }
         }
     }
 
     override fun connect() {
         webSocketProcessor.onNext(client.newWebSocket(request, listener))
-        connectionState.onNext(ConnectionState.Connecting)
+        connectionStateProcessor.onNext(Connecting)
     }
 
 
     override fun disconnect() {
         webSocketProcessor.value?.close(1000, null)
-        connectionState.onNext(ConnectionState.Closing)
+        connectionStateProcessor.onNext(Closing)
     }
 
     override fun sendRawMessage(string: String) {
@@ -68,12 +70,6 @@ class OkHttpSocketClient(wssBaseUrl: String) : SocketClient {
     override fun getRawMessageStream() =
         (messagePublisher as Flowable<String>).subscribeOn(Schedulers.io())
 
-
-    sealed class ConnectionState {
-        object Connecting : ConnectionState()
-        object Connected : ConnectionState()
-        object Closing : ConnectionState()
-        object ClosedNormal : ConnectionState()
-        object ClosedError : ConnectionState()
-    }
+    override fun connectionState() =
+        (connectionStateProcessor as Flowable<ConnectionState>).subscribeOn(Schedulers.io())
 }
