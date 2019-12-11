@@ -11,8 +11,6 @@ import com.testtask.data.remote.rest.UserDataSourceImpl
 import com.testtask.data.remote.rest.adapter.RestAdapter
 import com.testtask.data.remote.rest.adapter.impl.RetrofitRestAdapter
 import com.testtask.data.remote.wss.TransactionWssDataSource
-import com.testtask.data.remote.wss.client.SocketClient
-import com.testtask.data.remote.wss.client.impl.OkHttpSocketClient
 import com.testtask.data.remote.wss.mapper.SocketMapperFactory
 import com.testtask.data.remote.wss.mapper.gson.GsonSocketMapperFactory
 import com.testtask.data.remote.wss.service.SocketServiceFactory
@@ -117,12 +115,6 @@ val dataModule = module {
         )
     }
 
-    single<SocketClient> {
-        OkHttpSocketClient(
-            wssBaseUrl = androidApplication().getString(R.string.wss_base_url)
-        )
-    }
-
     single<TransactionDataSource> {
         TransactionWssDataSource(
             serviceFactory = get(),
@@ -132,7 +124,7 @@ val dataModule = module {
 
     single<SocketServiceFactory> {
         SocketServiceFactoryImpl(
-            socketClient = get(),
+            wssBaseUrl = androidApplication().getString(R.string.wss_base_url),
             mapperFactory = get()
         )
     }

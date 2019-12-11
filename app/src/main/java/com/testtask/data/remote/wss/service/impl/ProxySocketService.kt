@@ -1,7 +1,6 @@
 package com.testtask.data.remote.wss.service.impl
 
 import android.annotation.SuppressLint
-import com.testtask.data.remote.wss.client.SocketClient
 import com.testtask.data.remote.wss.mapper.CommandMapper
 import com.testtask.data.remote.wss.mapper.MessageMapper
 import com.testtask.data.remote.wss.service.SocketService
@@ -9,9 +8,9 @@ import io.reactivex.Flowable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.Schedulers
 
-class SocketServiceImpl<Command, Message>(
+class ProxySocketService<Command, Message>(
 
-    private val socketClient: SocketClient,
+    private val hostSocketClient: SocketService<String, String>,
 
     private val commandMapper: CommandMapper<Command>,
 
@@ -22,22 +21,22 @@ class SocketServiceImpl<Command, Message>(
     private val messagePublisher = PublishProcessor.create<Message>()
 
     init {
-        socketClient.connect()
+        hostSocketClient.connect()
         subscribeToStream()
     }
 
     override fun connect() {
-        socketClient.connect()
+        hostSocketClient.connect()
     }
 
     override fun disconnect() {
-        socketClient.disconnect()
+        hostSocketClient.disconnect()
     }
 
-    override fun connectionState() = socketClient.connectionState()
+    override fun connectionState() = hostSocketClient.connectionState()
 
     override fun sendCommand(command: Command) {
-        socketClient.sendRawMessage(commandMapper.map(command))
+        hostSocketClient.sendCommand(commandMapper.map(command))
     }
 
     override fun getMessageStream() =
@@ -46,7 +45,7 @@ class SocketServiceImpl<Command, Message>(
 
     @SuppressLint("CheckResult")
     private fun subscribeToStream() {
-        socketClient.getRawMessageStream()
+        hostSocketClient.getMessageStream()
             .map { messageMapper.map(it) }
             .subscribe({ (message) ->
                 message?.let { messagePublisher.onNext(it) }

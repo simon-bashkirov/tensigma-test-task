@@ -1,12 +1,11 @@
 package com.testtask.data.remote.wss.service.impl
 
-import com.testtask.data.remote.wss.client.SocketClient
 import com.testtask.data.remote.wss.mapper.SocketMapperFactory
 import com.testtask.data.remote.wss.service.SocketServiceFactory
 
 class SocketServiceFactoryImpl(
 
-    private val socketClient: SocketClient,
+    private val wssBaseUrl: String,
 
     private val mapperFactory: SocketMapperFactory
 
@@ -15,8 +14,8 @@ class SocketServiceFactoryImpl(
     override fun <Command, Message> createSocketService(
         commandClass: Class<Command>,
         messageClass: Class<Message>
-    ) = SocketServiceImpl(
-        socketClient = socketClient,
+    ) = ProxySocketService(
+        hostSocketClient = OkHttpSocketService(wssBaseUrl),
         commandMapper = mapperFactory.createCommandMapper(commandClass),
         messageMapper = mapperFactory.createMessageMapper(messageClass)
     )

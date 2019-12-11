@@ -1,4 +1,4 @@
-package com.testtask.data.remote.wss.client.state
+package com.testtask.data.remote.wss.state
 
 sealed class ConnectionState {
     object Connecting : ConnectionState()

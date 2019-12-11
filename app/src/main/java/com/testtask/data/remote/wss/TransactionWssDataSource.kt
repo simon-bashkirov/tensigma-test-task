@@ -1,13 +1,13 @@
 package com.testtask.data.remote.wss
 
 import android.annotation.SuppressLint
-import com.testtask.data.remote.wss.client.state.ConnectionState
 import com.testtask.data.remote.wss.mapper.SocketMapperFactory
 import com.testtask.data.remote.wss.model.command.BitcoinSocketCommand
 import com.testtask.data.remote.wss.model.command.SocketCommandType
 import com.testtask.data.remote.wss.model.message.BitcoinSocketMessage
 import com.testtask.data.remote.wss.model.message.SocketMessageType.*
 import com.testtask.data.remote.wss.service.SocketServiceFactory
+import com.testtask.data.remote.wss.state.ConnectionState
 import com.testtask.data.repository.transaction.TransactionDataSource
 import com.testtask.domain.model.transaction.Transaction
 import io.reactivex.Completable

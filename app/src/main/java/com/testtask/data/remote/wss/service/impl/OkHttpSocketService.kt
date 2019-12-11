@@ -1,8 +1,8 @@
-package com.testtask.data.remote.wss.client.impl
+package com.testtask.data.remote.wss.service.impl
 
-import com.testtask.data.remote.wss.client.SocketClient
-import com.testtask.data.remote.wss.client.state.ConnectionState
-import com.testtask.data.remote.wss.client.state.ConnectionState.*
+import com.testtask.data.remote.wss.service.SocketService
+import com.testtask.data.remote.wss.state.ConnectionState
+import com.testtask.data.remote.wss.state.ConnectionState.*
 import io.reactivex.Flowable
 import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.processors.PublishProcessor
@@ -11,7 +11,7 @@ import okhttp3.*
 import okio.ByteString
 
 
-class OkHttpSocketClient(wssBaseUrl: String) : SocketClient {
+class OkHttpSocketService(wssBaseUrl: String) : SocketService<String, String> {
 
     private val client = OkHttpClient.Builder().build()
     private val request = Request.Builder().url(wssBaseUrl).build()
@@ -63,11 +63,11 @@ class OkHttpSocketClient(wssBaseUrl: String) : SocketClient {
         connectionStateProcessor.onNext(Closing)
     }
 
-    override fun sendRawMessage(string: String) {
-        webSocketProcessor.value?.send(string)
+    override fun sendCommand(command: String) {
+        webSocketProcessor.value?.send(command)
     }
 
-    override fun getRawMessageStream() =
+    override fun getMessageStream() =
         (messagePublisher as Flowable<String>).subscribeOn(Schedulers.io())
 
     override fun connectionState() =
