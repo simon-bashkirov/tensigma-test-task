@@ -49,7 +49,7 @@ class TransactionWssDataSource(
     @SuppressLint("CheckResult")
     private fun subscribeToStream() {
         service.getMessageStream()
-            .subscribe { message ->
+            .subscribe({ message ->
                 when (message.type) {
                     TRANSACTION -> {
                         message.payload
@@ -61,8 +61,9 @@ class TransactionWssDataSource(
                     SocketMessageType.PONG -> {/*TODO*/
                     }
                 }
-
-            }
+            }, {
+                //TODO error handling
+            })
     }
 
 

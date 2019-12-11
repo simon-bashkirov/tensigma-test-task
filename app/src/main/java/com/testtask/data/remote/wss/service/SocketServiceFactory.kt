@@ -5,7 +5,5 @@ interface SocketServiceFactory {
     fun <Command, Message> createSocketService(
         commandClass: Class<Command>,
         messageClass: Class<Message>
-    )
-            : SocketService<Command, Message>
-
+    ): SocketService<Command, Message>
 }
