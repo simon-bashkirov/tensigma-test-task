@@ -104,7 +104,12 @@ class MainViewModel(
             useCase
                 .execute(NoParams)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe()
+                .subscribe({
+                    //Do nothing
+                },
+                    {
+                        setProgressState(ProgressState.Error(it.message))
+                    })
         )
 
     }
