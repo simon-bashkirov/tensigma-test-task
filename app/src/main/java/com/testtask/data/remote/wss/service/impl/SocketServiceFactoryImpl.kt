@@ -15,7 +15,7 @@ class SocketServiceFactoryImpl(
         commandClass: Class<Command>,
         messageClass: Class<Message>
     ) = ProxySocketService(
-        hostSocketClient = OkHttpSocketService(wssBaseUrl),
+        hostSocketService = OkHttpSocketService(wssBaseUrl),
         commandMapper = mapperFactory.createCommandMapper(commandClass),
         messageMapper = mapperFactory.createMessageMapper(messageClass)
     )

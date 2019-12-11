@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 
 class ProxySocketService<Command, Message>(
 
-    private val hostSocketClient: SocketService<String, String>,
+    private val hostSocketService: SocketService<String, String>,
 
     private val commandMapper: CommandMapper<Command>,
 
@@ -21,22 +21,22 @@ class ProxySocketService<Command, Message>(
     private val messagePublisher = PublishProcessor.create<Message>()
 
     init {
-        hostSocketClient.connect()
+        hostSocketService.connect()
         subscribeToStream()
     }
 
     override fun connect() {
-        hostSocketClient.connect()
+        hostSocketService.connect()
     }
 
     override fun disconnect() {
-        hostSocketClient.disconnect()
+        hostSocketService.disconnect()
     }
 
-    override fun connectionState() = hostSocketClient.connectionState()
+    override fun connectionState() = hostSocketService.connectionState()
 
     override fun sendCommand(command: Command) {
-        hostSocketClient.sendCommand(commandMapper.map(command))
+        hostSocketService.sendCommand(commandMapper.map(command))
     }
 
     override fun getMessageStream() =
@@ -45,7 +45,7 @@ class ProxySocketService<Command, Message>(
 
     @SuppressLint("CheckResult")
     private fun subscribeToStream() {
-        hostSocketClient.getMessageStream()
+        hostSocketService.getMessageStream()
             .map { messageMapper.map(it) }
             .subscribe({ (message) ->
                 message?.let { messagePublisher.onNext(it) }
