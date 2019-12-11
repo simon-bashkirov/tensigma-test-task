@@ -1,6 +1,6 @@
-package com.testtask.data.remote.wss.adapter.impl
+package com.testtask.data.remote.wss.client.impl
 
-import com.testtask.data.remote.wss.adapter.WebSocketAdapter
+import com.testtask.data.remote.wss.client.SocketClient
 import io.reactivex.Flowable
 import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.processors.PublishProcessor
@@ -9,7 +9,7 @@ import okhttp3.*
 import okio.ByteString
 
 
-class OkHttpWebSocketAdapter(wssBaseUrl: String) : WebSocketAdapter {
+class OkHttpSocketClient(wssBaseUrl: String) : SocketClient {
 
     private val client = OkHttpClient.Builder().build()
     private val request = Request.Builder().url(wssBaseUrl).build()
@@ -61,11 +61,11 @@ class OkHttpWebSocketAdapter(wssBaseUrl: String) : WebSocketAdapter {
         connectionState.onNext(ConnectionState.Closing)
     }
 
-    override fun sendMessage(string: String) {
+    override fun sendRawMessage(string: String) {
         webSocketProcessor.value?.send(string)
     }
 
-    override fun getMessageStream() =
+    override fun getRawMessageStream() =
         (messagePublisher as Flowable<String>).subscribeOn(Schedulers.io())
 
 
