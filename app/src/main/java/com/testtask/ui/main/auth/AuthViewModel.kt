@@ -1,8 +1,8 @@
-package com.testtask.ui.fragment.auth
+package com.testtask.ui.main.auth
 
 import com.testtask.domain.interactor.auth.SignInUseCase
 import com.testtask.domain.interactor.auth.SignInUseCase.Params
-import com.testtask.ui.base.BaseViewModel
+import com.testtask.ui.BaseViewModel
 import com.testtask.utils.livedata.DistinctLiveData
 
 class AuthViewModel(

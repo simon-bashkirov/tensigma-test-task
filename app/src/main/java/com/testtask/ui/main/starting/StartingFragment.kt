@@ -1,4 +1,4 @@
-package com.testtask.ui.fragment.starting
+package com.testtask.ui.main.starting
 
 import android.os.Bundle
 import android.view.LayoutInflater

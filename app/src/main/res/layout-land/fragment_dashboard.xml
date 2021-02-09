@@ -1,40 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
     <data>
 
-        <import type="android.view.View" />
-
         <variable
             name="viewModel"
-            type="com.testtask.ui.fragment.main.MainViewModel" />
+            type="com.testtask.ui.main.dashboard.DashboardViewModel" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragment.main.MainFragment">
+        tools:context=".ui.main.dashboard.DashboardFragment">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/singOutButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
             android:onClick="@{() -> viewModel.signOutButtonClicked()}"
             android:text="@string/sign_out_button_caption"
             app:layout_constraintEnd_toEndOf="@+id/clearButton"
-            app:layout_constraintStart_toStartOf="@id/startButton"
+            app:layout_constraintStart_toStartOf="@+id/startButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/verticalCenterGuideLine"
+            android:id="@+id/verticalRightGuideLine"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.75" />
 
         <TextView
             android:id="@+id/userFirstNameCaptionTextView"
@@ -44,7 +42,7 @@
             android:layout_marginEnd="@dimen/margin_small"
             android:scrollHorizontally="true"
             android:text="@string/user_first_name_caption"
-            app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine"
+            app:layout_constraintEnd_toStartOf="@id/verticalRightGuideLine"
             app:layout_constraintTop_toBottomOf="@id/singOutButton" />
 
         <TextView
@@ -59,7 +57,7 @@
             android:text="@{viewModel.firstName}"
             app:layout_constraintBottom_toBottomOf="@id/userFirstNameCaptionTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
+            app:layout_constraintStart_toEndOf="@id/verticalRightGuideLine"
             app:layout_constraintTop_toTopOf="@id/userFirstNameCaptionTextView"
             tools:text="John" />
 
@@ -70,7 +68,7 @@
             android:layout_marginTop="@dimen/margin_normal"
             android:layout_marginEnd="@dimen/margin_small"
             android:text="@string/user_last_name_caption"
-            app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine"
+            app:layout_constraintEnd_toStartOf="@id/verticalRightGuideLine"
             app:layout_constraintTop_toBottomOf="@id/userFirstNameCaptionTextView" />
 
         <TextView
@@ -85,7 +83,7 @@
             android:text="@{viewModel.lastName}"
             app:layout_constraintBottom_toBottomOf="@id/userLastNameCaptionTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
+            app:layout_constraintStart_toEndOf="@id/verticalRightGuideLine"
             app:layout_constraintTop_toTopOf="@id/userLastNameCaptionTextView"
             tools:text="Smith" />
 
@@ -96,7 +94,7 @@
             android:layout_marginTop="@dimen/margin_normal"
             android:layout_marginEnd="@dimen/margin_small"
             android:text="@string/user_email_caption"
-            app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine"
+            app:layout_constraintEnd_toStartOf="@id/verticalRightGuideLine"
             app:layout_constraintTop_toBottomOf="@id/userLastNameCaptionTextView" />
 
         <TextView
@@ -111,41 +109,25 @@
             android:text="@{viewModel.email}"
             app:layout_constraintBottom_toBottomOf="@id/userEmailCaptionTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
+            app:layout_constraintStart_toEndOf="@id/verticalRightGuideLine"
             app:layout_constraintTop_toTopOf="@id/userEmailCaptionTextView"
             tools:text="john-smith@gmail.com" />
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:visibility="@{viewModel.showProgress ? View.VISIBLE : View.INVISIBLE, default = invisible}"
-            app:layout_constraintBottom_toTopOf="@id/userEmailOutputTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
-            app:layout_constraintTop_toTopOf="@id/userFirstNameOutputTextView" />
-
         <include
             android:id="@+id/transactionsHeader"
-            layout="@layout/item_transaction"
+            layout="@layout/item_transaction_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_normal"
-            app:hashOutput="@{@string/hash_caption}"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/transactionsRecyclerView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userEmailCaptionTextView"
-            app:timeOutput="@{@string/time_caption}"
-            app:valueOutput="@{@string/btc_caption}" />
+            app:layout_constraintTop_toTopOf="@id/singOutButton" />
 
         <View
             android:id="@+id/tableTopDivider"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/transactionsRecyclerView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/transactionsHeader" />
 
@@ -153,24 +135,15 @@
             android:id="@+id/transactionsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/margin_normal"
             android:layout_marginBottom="@dimen/margin_normal"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/tableBottomDivider"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/startButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tableTopDivider"
+            app:layout_constraintTop_toBottomOf="@+id/tableTopDivider"
             tools:listitem="@layout/item_transaction" />
-
-        <View
-            android:id="@+id/tableBottomDivider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/margin_normal"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintBottom_toTopOf="@id/transactionsTotalCaptionTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/transactionsTotalCaptionTextView"
@@ -180,7 +153,7 @@
             android:layout_marginBottom="@dimen/margin_normal"
             android:text="@string/transactions_total_caption"
             app:layout_constraintBottom_toTopOf="@id/stopButton"
-            app:layout_constraintEnd_toStartOf="@id/verticalCenterGuideLine" />
+            app:layout_constraintEnd_toStartOf="@id/verticalRightGuideLine" />
 
         <TextView
             android:id="@+id/transactionsTotalOutputTextView"
@@ -194,9 +167,9 @@
             android:text="@{viewModel.total}"
             app:layout_constraintBottom_toBottomOf="@id/transactionsTotalCaptionTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/verticalCenterGuideLine"
+            app:layout_constraintStart_toEndOf="@id/verticalRightGuideLine"
             app:layout_constraintTop_toTopOf="@id/transactionsTotalCaptionTextView"
-            tools:text="10000" />
+            tools:text="10000 USD" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/startButton"
@@ -214,12 +187,12 @@
             android:id="@+id/stopButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_small"
             android:onClick="@{() -> viewModel.stopButtonClicked()}"
             android:text="@string/stop_button_caption"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/verticalCenterGuideLine"
-            app:layout_constraintStart_toStartOf="@id/verticalCenterGuideLine" />
+            app:layout_constraintEnd_toEndOf="@id/verticalRightGuideLine"
+            app:layout_constraintStart_toStartOf="@id/verticalRightGuideLine" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/clearButton"

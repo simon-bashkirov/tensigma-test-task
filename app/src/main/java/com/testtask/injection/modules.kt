@@ -31,8 +31,9 @@ import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
 import com.testtask.domain.repository.AuthRepository
 import com.testtask.domain.repository.TransactionRepository
 import com.testtask.domain.repository.UserRepository
-import com.testtask.ui.fragment.auth.AuthViewModel
-import com.testtask.ui.fragment.main.MainViewModel
+import com.testtask.ui.main.MainViewModel
+import com.testtask.ui.main.auth.AuthViewModel
+import com.testtask.ui.main.dashboard.DashboardViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -46,7 +47,7 @@ val uiModule = module {
     }
 
     viewModel {
-        MainViewModel(
+        DashboardViewModel(
             observeTransactionUpdatesUseCase = get(),
             observeMyFirstProfileUseCase = get(),
             signOutUseCase = get(),
@@ -57,7 +58,7 @@ val uiModule = module {
     }
 
     viewModel {
-        com.testtask.ui.activity.MainActivityViewModel(
+        MainViewModel(
             observeAuthStateUse = get()
         )
     }

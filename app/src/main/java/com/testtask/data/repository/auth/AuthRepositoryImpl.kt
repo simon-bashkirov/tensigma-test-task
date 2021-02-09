@@ -1,8 +1,8 @@
 package com.testtask.data.repository.auth
 
 import android.annotation.SuppressLint
+import com.testtask.domain.model.user.AuthState
 import com.testtask.domain.repository.AuthRepository
-import com.testtask.domain.state.AuthState
 import io.reactivex.Completable
 import io.reactivex.processors.BehaviorProcessor
 import java.util.concurrent.Executors

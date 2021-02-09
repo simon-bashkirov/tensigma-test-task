@@ -1,4 +1,4 @@
-package com.testtask.ui.fragment.auth
+package com.testtask.ui.main.auth
 
 import android.content.Context
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import com.testtask.R
 import com.testtask.databinding.FragmentAuthBinding
-import com.testtask.ui.base.BaseFragment
-import com.testtask.ui.state.ProgressState
+import com.testtask.ui.BaseFragment
+import com.testtask.utils.state.ProgressState
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AuthFragment : BaseFragment() {

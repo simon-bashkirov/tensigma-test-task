@@ -1,8 +1,8 @@
-package com.testtask.ui.mapper
+package com.testtask.ui.main.dashboard.mapper
 
 import com.testtask.domain.mapper.Mapper
 import com.testtask.domain.model.transaction.Transaction
-import com.testtask.ui.model.TransactionItem
+import com.testtask.ui.main.dashboard.model.TransactionItem
 import java.text.SimpleDateFormat
 
 object TransactionMapper : Mapper<Transaction, TransactionItem> {

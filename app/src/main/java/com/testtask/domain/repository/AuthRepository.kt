@@ -1,6 +1,6 @@
 package com.testtask.domain.repository
 
-import com.testtask.domain.state.AuthState
+import com.testtask.domain.model.user.AuthState
 import io.reactivex.Completable
 import io.reactivex.Flowable
 

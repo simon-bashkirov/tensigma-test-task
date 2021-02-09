@@ -1,4 +1,4 @@
-package com.testtask.ui.fragment.main
+package com.testtask.ui.main.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,14 +11,14 @@ import com.testtask.domain.interactor.transaction.StartTransactionsUseCase
 import com.testtask.domain.interactor.transaction.StopTransactionsUseCase
 import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
 import com.testtask.domain.model.user.Profile
-import com.testtask.ui.base.BaseViewModel
-import com.testtask.ui.mapper.ProfileMapper
-import com.testtask.ui.mapper.TransactionMapper
-import com.testtask.ui.model.ProfileShort
-import com.testtask.ui.model.TransactionItem
+import com.testtask.ui.BaseViewModel
+import com.testtask.ui.main.dashboard.mapper.ProfileMapper
+import com.testtask.ui.main.dashboard.mapper.TransactionMapper
+import com.testtask.ui.main.dashboard.model.ProfileShort
+import com.testtask.ui.main.dashboard.model.TransactionItem
 import com.testtask.utils.lang.Optional
 
-class MainViewModel(
+class DashboardViewModel(
 
     observeMyFirstProfileUseCase: ObserveMyFirstProfileUseCase,
 

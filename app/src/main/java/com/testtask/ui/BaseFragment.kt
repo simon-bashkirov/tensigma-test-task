@@ -1,11 +1,11 @@
-package com.testtask.ui.base
+package com.testtask.ui
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
-import com.testtask.ui.state.ProgressState
+import com.testtask.utils.state.ProgressState
 
 abstract class BaseFragment : Fragment() {
 

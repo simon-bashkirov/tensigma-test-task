@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.testtask.ui.fragment.auth.AuthViewModel" />
+            type="com.testtask.ui.main.auth.AuthViewModel" />
 
     </data>
 
@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:paddingStart="@dimen/margin_large"
         android:paddingEnd="@dimen/margin_large"
-        tools:context=".ui.fragment.auth.AuthFragment">
+        tools:context=".ui.main.auth.AuthFragment">
 
         <EditText
             android:id="@+id/emailTextView"

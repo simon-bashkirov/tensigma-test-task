@@ -1,10 +1,10 @@
-package com.testtask.ui.base
+package com.testtask.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.testtask.ui.state.ProgressState
+import com.testtask.utils.state.ProgressState
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers

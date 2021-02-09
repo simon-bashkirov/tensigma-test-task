@@ -1,4 +1,4 @@
-package com.testtask.domain.state
+package com.testtask.domain.model.user
 
 sealed class AuthState {
     object Authorized : AuthState()

@@ -1,4 +1,4 @@
-package com.testtask.ui.state
+package com.testtask.utils.state
 
 sealed class ProgressState {
 

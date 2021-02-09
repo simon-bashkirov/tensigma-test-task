@@ -1,4 +1,4 @@
-package com.testtask.ui.model
+package com.testtask.ui.main.dashboard.model
 
 data class ProfileShort(
     val firstName: String,
