@@ -7,8 +7,8 @@ import com.testtask.data.local.LocalStorage
 import com.testtask.data.local.pref.StringPrefLocalStorage
 import com.testtask.data.remote.rest.AuthRemoteDataSourceImpl
 import com.testtask.data.remote.rest.UserDataSourceImpl
-import com.testtask.data.remote.rest.adapter.RestAdapter
-import com.testtask.data.remote.rest.adapter.impl.RetrofitRestAdapter
+import com.testtask.data.remote.rest.service.ApiServiceFactory
+import com.testtask.data.remote.rest.service.impl.RetrofitApiServiceFactory
 import com.testtask.data.remote.wss.TransactionWssDataSource
 import com.testtask.data.remote.wss.mapper.SocketMapperFactory
 import com.testtask.data.remote.wss.mapper.gson.GsonSocketMapperFactory
@@ -83,8 +83,7 @@ val dataModule = module {
 
     single<AuthRemoteDataSource> {
         AuthRemoteDataSourceImpl(
-            restAdapter = get(),
-            authTokenProvider = get()
+            apiServiceFactory = get()
         )
     }
 
@@ -95,17 +94,16 @@ val dataModule = module {
         )
     }
 
-    single<RestAdapter> {
-        RetrofitRestAdapter(
-            apiBaseUrl = androidApplication().getString(R.string.api_base_url)
+    single<ApiServiceFactory> {
+        RetrofitApiServiceFactory(
+            apiBaseUrl = androidApplication().getString(R.string.api_base_url),
+            authTokenProvider = get()
         )
     }
 
-
     single<UserDataSource> {
         UserDataSourceImpl(
-            restAdapter = get(),
-            tokenProvider = get()
+            apiServiceFactory = get()
         )
     }
 
