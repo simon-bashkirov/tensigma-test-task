@@ -1,5 +1,6 @@
 package com.testtask.data.remote.wss.model.message
 
+import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 
 data class BitcoinSocketMessage(
@@ -8,5 +9,5 @@ data class BitcoinSocketMessage(
     val type: SocketMessageType,
 
     @SerializedName("x")
-    val payload: Any? = null
+    val payload: JsonObject? = null
 )
