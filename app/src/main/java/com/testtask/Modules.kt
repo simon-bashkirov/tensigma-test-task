@@ -1,6 +1,5 @@
-package com.testtask.injection
+package com.testtask
 
-import com.testtask.R
 import com.testtask.data.local.AuthLocalDataSourceImpl
 import com.testtask.data.local.AuthLostObserverImpl
 import com.testtask.data.local.AuthTokenProviderImpl
