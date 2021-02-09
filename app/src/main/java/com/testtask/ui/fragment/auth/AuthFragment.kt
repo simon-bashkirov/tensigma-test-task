@@ -3,22 +3,18 @@ package com.testtask.ui.fragment.auth
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import com.testtask.R
 import com.testtask.databinding.FragmentAuthBinding
+import com.testtask.ui.base.BaseFragment
 import com.testtask.ui.state.ProgressState
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class AuthFragment : Fragment() {
+class AuthFragment : BaseFragment() {
 
-    private var binding: FragmentAuthBinding? = null
-
-    private val viewModel: AuthViewModel by viewModel()
+    override val viewModel: AuthViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,35 +22,20 @@ class AuthFragment : Fragment() {
         savedInstanceState: Bundle?
     ) = DataBindingUtil.inflate<FragmentAuthBinding>(
         inflater, R.layout.fragment_auth, container, false
-    )
-        .apply { lifecycleOwner = viewLifecycleOwner }
-        .also { binding = it }
-        .root
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding?.viewModel = viewModel
-        viewModel.progressState.observe(viewLifecycleOwner) {
-            when (it) {
-                is ProgressState.Success -> {/*do nothing*/
-                }
-                is ProgressState.Progress -> hideSoftKeyboard(view)
-                is ProgressState.Error ->
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-
+    ).apply {
+        lifecycleOwner = viewLifecycleOwner
+        viewModel = this@AuthFragment.viewModel.apply {
+            progressState.observe(viewLifecycleOwner) {
+                if (it is ProgressState.Progress) hideSoftKeyboard()
             }
         }
-    }
+    }.root
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
-
-    private fun hideSoftKeyboard(view: View) {
+    private fun hideSoftKeyboard() {
         val imm =
             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-        imm?.hideSoftInputFromWindow(view.windowToken, 0)
+                ?: return
+        val view = view ?: return
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

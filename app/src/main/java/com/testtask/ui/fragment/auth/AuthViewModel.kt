@@ -2,7 +2,7 @@ package com.testtask.ui.fragment.auth
 
 import com.testtask.domain.interactor.auth.SignInUseCase
 import com.testtask.domain.interactor.auth.SignInUseCase.Params
-import com.testtask.ui.BaseViewModel
+import com.testtask.ui.base.BaseViewModel
 import com.testtask.utils.livedata.DistinctLiveData
 
 class AuthViewModel(
@@ -14,12 +14,8 @@ class AuthViewModel(
     val password = DistinctLiveData<String>()
 
     fun signInButtonClicked() {
-        signInUseCase(
-            Params(
-                email.value ?: return,
-                password.value ?: return
-            )
-        ).subscribeUi()
+        signInUseCase(Params(email.value ?: return, password.value ?: return))
+            .subscribeUi()
     }
 
 }

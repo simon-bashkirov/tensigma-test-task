@@ -2,22 +2,17 @@ package com.testtask.ui.fragment.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.testtask.R
 import com.testtask.databinding.FragmentMainBinding
-import com.testtask.ui.state.ProgressState
+import com.testtask.ui.base.BaseFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment() {
 
-    private var binding: FragmentMainBinding? = null
-
-    private val viewModel: MainViewModel by viewModel()
+    override val viewModel: MainViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,33 +20,18 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ) = DataBindingUtil.inflate<FragmentMainBinding>(
         inflater, R.layout.fragment_main, container, false
-    )
-        .apply { lifecycleOwner = viewLifecycleOwner }
-        .also { binding = it }
-        .root
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding?.viewModel = viewModel
+    ).apply {
+        lifecycleOwner = viewLifecycleOwner
         val transactionsAdapter = TransactionsAdapter()
-        binding?.transactionsRecyclerView?.apply {
+        transactionsRecyclerView.apply {
             itemAnimator = DefaultItemAnimator()
             adapter = transactionsAdapter
         }
-        viewModel.transactions.observe(viewLifecycleOwner) {
-            transactionsAdapter.submitList(it)
-            binding?.transactionsRecyclerView?.smoothScrollToPosition(transactionsAdapter.itemCount)
-        }
-
-        viewModel.progressState.observe(viewLifecycleOwner) {
-            if (it is ProgressState.Error) {
-                Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+        viewModel = this@MainFragment.viewModel.apply {
+            transactions.observe(viewLifecycleOwner) {
+                transactionsAdapter.submitList(it)
+                transactionsRecyclerView.smoothScrollToPosition(transactionsAdapter.itemCount)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
+    }.root
 }

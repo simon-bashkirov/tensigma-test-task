@@ -1,4 +1,4 @@
-package com.testtask.ui
+package com.testtask.ui.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -28,7 +28,7 @@ abstract class BaseViewModel : ViewModel() {
         disposables.clear()
     }
 
-    protected fun setProgressState(progressState: ProgressState) {
+    private fun setProgressState(progressState: ProgressState) {
         _progressState.value = progressState
     }
 
@@ -98,5 +98,5 @@ abstract class BaseViewModel : ViewModel() {
             .untilCleared()
     }
 
-    protected fun Disposable.untilCleared() = disposables.add(this)
+    private fun Disposable.untilCleared() = disposables.add(this)
 }

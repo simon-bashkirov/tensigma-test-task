@@ -33,16 +33,11 @@ import com.testtask.domain.repository.TransactionRepository
 import com.testtask.domain.repository.UserRepository
 import com.testtask.ui.fragment.auth.AuthViewModel
 import com.testtask.ui.fragment.main.MainViewModel
-import com.testtask.ui.fragment.starting.StartingViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val uiModule = module {
-
-    viewModel {
-        StartingViewModel()
-    }
 
     viewModel {
         AuthViewModel(
