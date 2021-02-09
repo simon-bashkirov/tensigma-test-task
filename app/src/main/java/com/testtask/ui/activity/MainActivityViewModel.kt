@@ -4,27 +4,17 @@ import androidx.lifecycle.LiveData
 import com.testtask.domain.interactor.NoParams
 import com.testtask.domain.interactor.auth.ObserveAuthStateUseCase
 import com.testtask.domain.state.AuthState
-import com.testtask.ui.livedata.ValueChangedLiveData
-import com.testtask.ui.viewmodel.DisposableViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.testtask.ui.BaseViewModel
+import com.testtask.utils.livedata.DistinctLiveData
 
 class MainActivityViewModel(observeAuthStateUse: ObserveAuthStateUseCase) :
-    DisposableViewModel() {
+    BaseViewModel() {
+
+    private val _authStateLiveData = DistinctLiveData<AuthState>()
+    val authStateLiveData = _authStateLiveData as LiveData<AuthState>
 
     init {
-        addDisposable(
-            observeAuthStateUse.execute(NoParams)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    _authStateLiveData.setValue(it)
-                },
-                    {
-                        //TODO show error
-                    })
-        )
+        _authStateLiveData.from(observeAuthStateUse(NoParams))
     }
-
-    private val _authStateLiveData = ValueChangedLiveData<AuthState>()
-    val authStateLiveData = _authStateLiveData as LiveData<AuthState>
 
 }

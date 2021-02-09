@@ -1,7 +1,7 @@
 package com.testtask.data.remote.wss.mapper
 
-import com.testtask.data.util.Optional
 import com.testtask.domain.mapper.Mapper
+import com.testtask.utils.lang.Optional
 
 interface MessageMapper<Message> : Mapper<String, Optional<Message>> {
 

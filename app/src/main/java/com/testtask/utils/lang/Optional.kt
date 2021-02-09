@@ -1,4 +1,4 @@
-package com.testtask.data.util
+package com.testtask.utils.lang
 
 /**
  * Wrapper for optional value of T.

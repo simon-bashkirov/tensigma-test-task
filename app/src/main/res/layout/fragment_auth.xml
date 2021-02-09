@@ -29,7 +29,7 @@
             android:hint="@string/email_hint"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
-            android:text="@={viewModel.eMailLiveData}"
+            android:text="@={viewModel.email}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +42,7 @@
             android:hint="@string/password_hint"
             android:importantForAutofill="no"
             android:inputType="textVisiblePassword"
-            android:text="@={viewModel.passWordLiveData}"
+            android:text="@={viewModel.password}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/emailTextView" />
@@ -52,7 +52,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
-            android:enabled="@{!viewModel.showProgressLiveData}"
+            android:enabled="@{!viewModel.showProgress}"
             android:onClick="@{() -> viewModel.signInButtonClicked()}"
             android:text="@string/sign_in_button_caption"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
-            android:visibility="@{viewModel.showProgressLiveData ? View.VISIBLE : View.INVISIBLE, default = invisible}"
+            android:visibility="@{viewModel.showProgress ? View.VISIBLE : View.INVISIBLE, default = invisible}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/submitButton" />

@@ -8,6 +8,6 @@ import com.testtask.domain.repository.TransactionRepository
 class ClearTransactionsUseCase(private val transactionRepository: TransactionRepository) :
     CompletableInteractor<NoParams> {
 
-    override fun execute(params: NoParams) = transactionRepository.clearTransactionCache()
+    override fun invoke(params: NoParams) = transactionRepository.clearTransactionCache()
 
 }

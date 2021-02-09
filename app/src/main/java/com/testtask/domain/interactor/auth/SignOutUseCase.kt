@@ -7,7 +7,7 @@ import com.testtask.domain.repository.AuthRepository
 class SignOutUseCase(private val authRepository: AuthRepository) :
     CompletableInteractor<NoParams> {
 
-    override fun execute(params: NoParams) =
+    override fun invoke(params: NoParams) =
         authRepository.signOut()
 
 }

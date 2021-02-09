@@ -8,6 +8,6 @@ import com.testtask.domain.repository.TransactionRepository
 class StartTransactionsUseCase(private val transactionRepository: TransactionRepository) :
     CompletableInteractor<NoParams> {
 
-    override fun execute(params: NoParams) = transactionRepository.startTransactionStream()
+    override fun invoke(params: NoParams) = transactionRepository.startTransactionStream()
 
 }

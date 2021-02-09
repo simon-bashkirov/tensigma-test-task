@@ -1,9 +1,9 @@
 package com.testtask.data.repository.user
 
 import android.util.Log
-import com.testtask.data.util.Optional
 import com.testtask.domain.model.user.UserInfo
 import com.testtask.domain.repository.UserRepository
+import com.testtask.utils.lang.Optional
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.processors.BehaviorProcessor

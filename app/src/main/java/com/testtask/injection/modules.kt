@@ -31,7 +31,6 @@ import com.testtask.domain.interactor.user.ObserveMyFirstProfileUseCase
 import com.testtask.domain.repository.AuthRepository
 import com.testtask.domain.repository.TransactionRepository
 import com.testtask.domain.repository.UserRepository
-import com.testtask.ui.activity.MainActivityViewModel
 import com.testtask.ui.fragment.auth.AuthViewModel
 import com.testtask.ui.fragment.main.MainViewModel
 import com.testtask.ui.fragment.starting.StartingViewModel
@@ -63,7 +62,7 @@ val uiModule = module {
     }
 
     viewModel {
-        MainActivityViewModel(
+        com.testtask.ui.activity.MainActivityViewModel(
             observeAuthStateUse = get()
         )
     }

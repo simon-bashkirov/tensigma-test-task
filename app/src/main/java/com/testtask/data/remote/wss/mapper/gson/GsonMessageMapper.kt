@@ -3,7 +3,7 @@ package com.testtask.data.remote.wss.mapper.gson
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.testtask.data.remote.wss.mapper.MessageMapper
-import com.testtask.data.util.Optional
+import com.testtask.utils.lang.Optional
 
 class GsonMessageMapper<Message>(private val messageClass: Class<Message>) :
     MessageMapper<Message> {

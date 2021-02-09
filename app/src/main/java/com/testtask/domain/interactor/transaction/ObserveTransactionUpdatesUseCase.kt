@@ -9,6 +9,6 @@ import com.testtask.domain.repository.TransactionRepository
 class ObserveTransactionUpdatesUseCase(private val transactionRepository: TransactionRepository) :
     FlowableInteractor<NoParams, List<Transaction>> {
 
-    override fun execute(params: NoParams) = transactionRepository.getTransactionListUpdates()
+    override fun invoke(params: NoParams) = transactionRepository.getTransactionListUpdates()
 
 }

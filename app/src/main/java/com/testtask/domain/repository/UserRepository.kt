@@ -1,7 +1,7 @@
 package com.testtask.domain.repository
 
-import com.testtask.data.util.Optional
 import com.testtask.domain.model.user.UserInfo
+import com.testtask.utils.lang.Optional
 import io.reactivex.Completable
 import io.reactivex.Flowable
 

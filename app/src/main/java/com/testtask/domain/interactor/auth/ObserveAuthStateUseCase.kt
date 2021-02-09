@@ -8,7 +8,7 @@ import com.testtask.domain.state.AuthState
 class ObserveAuthStateUseCase(private val authRepository: AuthRepository) :
     FlowableInteractor<NoParams, AuthState> {
 
-    override fun execute(params: NoParams) =
+    override fun invoke(params: NoParams) =
         authRepository.getAuthState()
 
 }

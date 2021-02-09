@@ -2,6 +2,6 @@ package com.testtask.domain.interactor
 
 interface BaseInteractor<Params, Result> {
 
-    fun execute(params: Params): Result
+    operator fun invoke(params: Params): Result
 
 }

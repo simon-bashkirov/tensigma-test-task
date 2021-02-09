@@ -6,7 +6,7 @@ import com.testtask.domain.repository.AuthRepository
 class SignInUseCase(private val authRepository: AuthRepository) :
     CompletableInteractor<SignInUseCase.Params> {
 
-    override fun execute(params: Params) =
+    override fun invoke(params: Params) =
         authRepository.signIn(
             email = params.email,
             password = params.password

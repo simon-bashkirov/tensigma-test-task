@@ -43,7 +43,7 @@ class MainFragment : Fragment() {
             binding?.transactionsRecyclerView?.smoothScrollToPosition(transactionsAdapter.itemCount)
         }
 
-        viewModel.progressStateLiveData.observe(viewLifecycleOwner) {
+        viewModel.progressState.observe(viewLifecycleOwner) {
             if (it is ProgressState.Error) {
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
             }
