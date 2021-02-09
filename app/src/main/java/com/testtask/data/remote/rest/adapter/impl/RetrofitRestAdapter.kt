@@ -19,23 +19,23 @@ class RetrofitRestAdapter(private val apiBaseUrl: String) :
             .addNetworkInterceptor(StethoInterceptor())
             .build()
 
-    override fun <Service> createUnauthorizedService(serviceClass: Class<Service>) =
+    override fun <Service> createUnauthorizedService(serviceClass: Class<Service>): Service =
         buildService(baseClient, serviceClass)
 
     override fun <Service> createAuthorizedService(
         serviceClass: Class<Service>,
         authTokenProvider: AuthTokenProvider
-    ) = baseClient
-            .newBuilder()
-            .addInterceptor { chain ->
-                val request = chain
-                    .request()
-                    .newBuilder()
-                    .addHeader("Authorization", "Bearer ${authTokenProvider.getToken()}")
-                    .build()
-                chain.proceed(request)
-            }
-            .build()
+    ): Service = baseClient
+        .newBuilder()
+        .addInterceptor { chain ->
+            val request = chain
+                .request()
+                .newBuilder()
+                .addHeader("Authorization", "Bearer ${authTokenProvider.getToken()}")
+                .build()
+            chain.proceed(request)
+        }
+        .build()
             .let { client ->
                 buildService(client, serviceClass)
             }

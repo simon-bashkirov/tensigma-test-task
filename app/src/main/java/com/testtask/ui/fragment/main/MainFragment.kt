@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.testtask.R
 import com.testtask.databinding.FragmentMainBinding
@@ -39,16 +38,16 @@ class MainFragment : Fragment() {
             itemAnimator = DefaultItemAnimator()
             adapter = transactionsAdapter
         }
-        viewModel.transactions.observe(viewLifecycleOwner, Observer {
+        viewModel.transactions.observe(viewLifecycleOwner) {
             transactionsAdapter.submitList(it)
             binding?.transactionsRecyclerView?.smoothScrollToPosition(transactionsAdapter.itemCount)
-        })
+        }
 
-        viewModel.progressStateLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.progressStateLiveData.observe(viewLifecycleOwner) {
             if (it is ProgressState.Error) {
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
             }
-        })
+        }
     }
 
     override fun onDestroyView() {

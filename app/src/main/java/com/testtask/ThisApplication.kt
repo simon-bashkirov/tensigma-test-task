@@ -8,6 +8,7 @@ import com.testtask.injection.uiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
 @Suppress("unused")
 class ThisApplication : Application() {
@@ -15,7 +16,7 @@ class ThisApplication : Application() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
         startKoin {
-            androidLogger()
+            androidLogger(Level.ERROR)
             androidContext(this@ThisApplication)
             modules(
                 listOf(

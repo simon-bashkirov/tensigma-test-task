@@ -9,7 +9,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.testtask.R
 import com.testtask.databinding.FragmentAuthBinding
 import com.testtask.ui.state.ProgressState
@@ -36,14 +35,16 @@ class AuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.viewModel = viewModel
-        viewModel.progressStateLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.progressStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
+                is ProgressState.Success -> {/*do nothing*/
+                }
                 is ProgressState.Progress -> hideSoftKeyboard(view)
                 is ProgressState.Error ->
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
 
             }
-        })
+        }
     }
 
     override fun onDestroyView() {
